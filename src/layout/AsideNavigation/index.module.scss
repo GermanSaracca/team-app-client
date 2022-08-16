@@ -1,0 +1,47 @@
+@use '../../styles/colors';
+@use '../../styles/mixins';
+@use '../../styles/variables';
+
+.aside {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 0.25rem;
+	background-color: colors.$black;
+	border-radius: 10px;
+	@include mixins.shadow-gradient();
+	@include mixins.custom-scrollbar(5px, transparent, colors.$primary);
+
+	@media (min-width: 1200px) {
+		width: variables.$aside_open_width;
+		overflow-y: auto;
+		overflow-x: hidden;
+		transition: width 300ms ease-in-out;
+
+		&.shrink {
+			width: variables.$aside_shrinked_width;
+			overflow: hidden;
+		}
+	}
+
+	nav {
+		margin-top: 2rem;
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	.shrink_btn {
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		@include mixins.circle-background();
+
+		span {
+			color: #fff;
+		}
+	}
+}

@@ -1,0 +1,31 @@
+@use '../styles/colors';
+@use '../styles/mixins';
+
+.layout_wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	min-height: 100vh;
+	max-height: 100vh;
+	padding: 0.25rem;
+	background-color: colors.$primary;
+
+	@media (min-width: 1200px) {
+		flex-direction: row;
+		gap: 0.5rem;
+		padding: 0.5rem;
+	}
+
+	.main_wrapper {
+		// flex: 1 0 auto;
+		flex: 1 1 0;
+		background-color: grey;
+		border-radius: 10px;
+		background-color: colors.$black;
+		@include mixins.shadow-gradient();
+		padding: 2rem;
+		max-height: calc(100vh - (0.25rem * 2));
+		overflow-y: auto;
+		@include mixins.custom-scrollbar(6px, transparent, #000);
+	}
+}
