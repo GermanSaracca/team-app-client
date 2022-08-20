@@ -1,0 +1,91 @@
+/* 
+  Here we import the font face files and assign them to the font-family property.
+  The main font will be applied to all the elements through the body selector.
+  To change the font-weight in any selector just apply font-weight: 300 | 400| 500, etc.
+*/
+
+/**
+	Chakra Petch
+*/
+// 300 - Light
+@font-face {
+	font-family: 'ChakraPetch';
+	src: url('../assets/fonts/ChakraPetch/ChakraPetch-Light.ttf');
+	font-weight: 300;
+	font-display: swap;
+}
+//400 - Regular
+@font-face {
+	font-family: 'ChakraPetch';
+	src: url('../assets/fonts/ChakraPetch/ChakraPetch-Regular.ttf');
+	font-weight: 400;
+	font-display: swap;
+}
+//500 - Medium
+@font-face {
+	font-family: 'ChakraPetch';
+	src: url('../assets/fonts/ChakraPetch/ChakraPetch-Medium.ttf');
+	font-weight: 500;
+	font-display: swap;
+}
+//600 - SemiBold
+@font-face {
+	font-family: 'ChakraPetch';
+	src: url('../assets/fonts/ChakraPetch/ChakraPetch-SemiBold.ttf');
+	font-weight: 600;
+	font-display: swap;
+}
+//700 - Bold
+@font-face {
+	font-family: 'ChakraPetch';
+	src: url('../assets/fonts/ChakraPetch/ChakraPetch-Bold.ttf');
+	font-weight: 700;
+	font-display: swap;
+}
+
+/** 
+	End Chakra Petch
+*/
+
+/** 
+	Montserrat
+*/
+
+// 200 - ExtraLight
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../assets/fonts/Montserrat/Montserrat-ExtraLight.ttf');
+	font-weight: 200;
+	font-display: swap;
+}
+// 300 - Light
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../assets/fonts/Montserrat/Montserrat-Light.ttf');
+	font-weight: 300;
+	font-display: swap;
+}
+//400 - Regular
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf');
+	font-weight: 400;
+	font-display: swap;
+}
+//500 - Medium
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../assets/fonts/Montserrat/Montserrat-Medium.ttf');
+	font-weight: 500;
+	font-display: swap;
+}
+//600 - SemiBold
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+	font-weight: 600;
+	font-display: swap;
+}
+/** 
+	End Montserrat
+*/

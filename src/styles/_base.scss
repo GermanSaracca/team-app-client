@@ -17,9 +17,11 @@
 	// border-radius: 6px;
 }
 html {
-	font-family: 'Source Code Pro', monospace;
+	font-family: 'ChakraPetch', sans-serif, monospace;
 	scroll-behavior: smooth;
 }
 body {
+	font-family: 'ChakraPetch', sans-serif, monospace;
+	color: #fff;
 	scrollbar-color: colors.$primaryDark colors.$primary; //Firefox
 }

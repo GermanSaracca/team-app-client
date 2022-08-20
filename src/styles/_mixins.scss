@@ -10,7 +10,7 @@
 	transition: all 100ms linear;
 
 	&:hover {
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: rgba(0, 0, 0, 0.3);
 	}
 }
 
@@ -23,5 +23,6 @@
 	}
 	&::-webkit-scrollbar-thumb {
 		background-color: $thumbColor;
+		border-radius: 4px;
 	}
 }

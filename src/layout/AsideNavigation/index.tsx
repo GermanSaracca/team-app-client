@@ -1,23 +1,8 @@
 import { useState } from 'react';
+import routes from '@/router/routes';
 import style from './index.module.scss';
-import { RiTeamLine } from 'react-icons/ri';
-import { AiOutlineHome } from 'react-icons/ai';
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
-import { AsideItemTypes } from '@/types';
 import { AsideItem } from './AsideItem';
-
-const Links: AsideItemTypes[] = [
-	{
-		text: 'Home',
-		to: '/',
-		icon: <AiOutlineHome size='1em' />,
-	},
-	{
-		text: 'Teams',
-		to: '/teams',
-		icon: <RiTeamLine size='1em' />,
-	},
-];
 
 const AsideNavigation = () => {
 	const [shrink, setShrink] = useState<boolean>(false);
@@ -40,9 +25,14 @@ const AsideNavigation = () => {
 			</button>
 			<nav>
 				<ul>
-					{Links.map(({ text, to, icon }) => (
-						<AsideItem to={to} text={text} icon={icon} key={text} shrinked={shrink} />
-					))}
+					{routes.map(({ name, path, icon, aside }) => {
+						if (!aside) {
+							// If the route has not aside on true, don't render it on the aside 😂
+							return null;
+						}
+
+						return <AsideItem path={path} name={name} icon={icon} key={name} shrinked={shrink} />;
+					})}
 				</ul>
 			</nav>
 		</aside>

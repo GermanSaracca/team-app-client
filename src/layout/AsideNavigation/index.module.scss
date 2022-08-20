@@ -3,12 +3,13 @@
 @use '../../styles/variables';
 
 .aside {
+	grid-area: 1 /1 / 6 / 2;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 1rem 0.25rem;
 	background-color: colors.$black;
-	border-radius: 10px;
+	border-radius: 6px;
 	@include mixins.shadow-gradient();
 	@include mixins.custom-scrollbar(5px, transparent, colors.$primary);
 

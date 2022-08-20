@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import AsideNavigation from './AsideNavigation';
+import Header from './Header';
 import style from './index.module.scss';
 
 interface Props {
@@ -11,6 +12,7 @@ const Layout = ({ children }: Props) => {
 	return (
 		<div className={style.layout_wrapper}>
 			<AsideNavigation />
+			<Header />
 			<main className={style.main_wrapper}>{children}</main>
 		</div>
 	);

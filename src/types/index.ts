@@ -1,1 +1,1 @@
-export * from './AsideItemTypes';
+export * from './RoutesTypes';
