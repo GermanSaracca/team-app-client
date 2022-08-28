@@ -1,0 +1,20 @@
+@use '../../styles/colors';
+@use '../../styles/mixins';
+
+.player_badge {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	border-radius: 6px;
+	color: #000;
+	@include mixins.shadow-gradient($shadow: false);
+	padding: 0.5rem;
+
+	.player_info {
+		color: colors.$white;
+
+		p {
+			font-weight: 700;
+		}
+	}
+}

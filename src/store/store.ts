@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { counterSlice } from './slices/counter';
+import { formationSlice } from './slices/formation';
 // ...
 
 export const store = configureStore({
 	reducer: {
 		counter: counterSlice.reducer,
+		formation: formationSlice.reducer,
 	},
 });
 

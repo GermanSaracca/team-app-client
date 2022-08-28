@@ -1,0 +1,114 @@
+@use '../../styles/colors';
+
+.custom-select {
+	width: 100% !important;
+
+	&__control {
+		border: 0 !important;
+	}
+	&__control--is-focused {
+		box-shadow: 0 0 0 2px colors.$primary !important;
+		&:hover {
+			border-color: none !important;
+			border: none !important;
+		}
+	}
+
+	&__indicator-separator {
+		// display: none !important;
+	}
+	&__indicator {
+		// padding: $space !important;
+	}
+	&__dropdown-indicator {
+		cursor: pointer !important;
+	}
+	&__clear-indicator {
+		// order: 2;
+		// color: $color-negative !important;
+	}
+	&__clear-indicator,
+	&__dropdown-indicator {
+		// display: grid !important;
+		// place-items: center !important;
+		// height: $label-select-file-height !important;
+		// padding: 0 $space_half !important;
+		// background-color: transparent !important;
+		// border-radius: 2px !important;
+		// cursor: pointer !important;
+
+		&:hover {
+			// background-color: change-color($color: $color-gris, $lightness: 87%) !important;
+		}
+	}
+
+	&__menu {
+		// margin-top: $space_x2 !important;
+		// border-radius: 0 !important;
+		// background-color: $color-claro !important;
+		// cursor: pointer !important;
+
+		&::before {
+			// content: '' !important;
+			// display: block !important;
+			// width: 20px !important;
+			// height: 8px !important;
+			// background-color: $color-gris !important;
+			// -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+			// clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+			// position: absolute !important;
+			// top: -8px !important;
+			// left: 8px !important;
+		}
+	}
+	&__menu-list {
+		// padding: 0 !important;
+		// overflow: overlay !important;
+		// max-height: calc(#{$input-group-height} * 5) !important;
+	}
+	&__option {
+		cursor: pointer !important;
+		color: colors.$black !important;
+
+		&--is-focused {
+			background-color: colors.$primary !important;
+		}
+		&--is-selected {
+			background-color: lighten($color: colors.$primary, $amount: 30) !important;
+		}
+	}
+	&__value-container {
+		// height: 100% !important;
+		// padding: 0 !important;
+	}
+	&__multi-value {
+		// margin: 5px !important;
+		// background-color: $color-claro !important;
+		// height: 40px !important;
+
+		p {
+			// display: none !important;
+		}
+	}
+	&__multi-value__label {
+		// display: grid !important;
+		// place-items: center !important;
+	}
+	&__multi-value__remove {
+		// padding: 0 8px !important;
+	}
+	&__placeholder {
+		// color: $color-primario-dark !important;
+	}
+
+	::-webkit-scrollbar {
+		// width: 6px !important;
+	}
+	::-webkit-scrollbar-track {
+		// background: transparent !important;
+	}
+	::-webkit-scrollbar-thumb {
+		// background: darken($color: $color-gris, $amount: 5%) !important;
+		// border-radius: 4px !important;
+	}
+}

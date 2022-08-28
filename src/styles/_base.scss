@@ -2,26 +2,21 @@
 
 ::selection {
 	background-color: colors.$primary;
-	color: #fff;
+	color: colors.$black;
 }
-::-webkit-scrollbar {
-	width: 8px;
-}
-::-webkit-scrollbar-track {
-	background-color: #000;
-	// border-top-right-radius: 6px;
-	// border-bottom-right-radius: 6px;
-}
-::-webkit-scrollbar-thumb {
-	background-color: colors.$primary;
-	// border-radius: 6px;
-}
+
 html {
 	font-family: 'ChakraPetch', sans-serif, monospace;
 	scroll-behavior: smooth;
 }
+
 body {
 	font-family: 'ChakraPetch', sans-serif, monospace;
 	color: #fff;
 	scrollbar-color: colors.$primaryDark colors.$primary; //Firefox
+}
+
+p {
+	margin: 0;
+	max-width: 75ch; //Mejora la lectura
 }

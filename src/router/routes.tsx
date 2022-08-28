@@ -6,7 +6,7 @@ import { GiPlayerPrevious } from 'react-icons/gi';
 import { RouteObject } from 'react-router-dom';
 
 const HomePage = lazy(() => import('../pages/Home'));
-const TeamsPage = lazy(() => import('../pages/Teams'));
+const PlayersPage = lazy(() => import('../pages/Players'));
 const FormationsPage = lazy(() => import('../pages/Formations'));
 
 type RouterPropsObject = RouteObject & RoutesProps;
@@ -20,9 +20,9 @@ const routes: RouterPropsObject[] = [
 		aside: true,
 	},
 	{
-		path: '/teams',
-		element: <TeamsPage />,
-		name: 'Equipos',
+		path: '/players',
+		element: <PlayersPage />,
+		name: 'Jugadores',
 		icon: <RiTeamLine size='1em' />,
 		aside: true,
 	},
@@ -43,22 +43,3 @@ const routes: RouterPropsObject[] = [
 ];
 
 export default routes;
-
-// function App() {
-//   let element = useRoutes([
-//     {
-//       path: "/",
-//       element: <Dashboard />,
-//       children: [
-//         {
-//           path: "messages",
-//           element: <DashboardMessages />,
-//         },
-//         { path: "tasks", element: <DashboardTasks /> },
-//       ],
-//     },
-//     { path: "team", element: <AboutPage /> },
-//   ]);
-
-//   return element;
-// }

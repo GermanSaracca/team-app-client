@@ -37,6 +37,10 @@
 		@extend .nav_link;
 		color: colors.$primary;
 	}
+	&:not(.shrinked):hover {
+		background-color: colors.$black;
+		border-radius: 5px;
+	}
 	/* 
 	Aside Item when Aside is shrinked
 	*/
@@ -58,7 +62,7 @@
 					box-shadow: 0 0 4px colors.$primary;
 					border: solid 1px colors.$primary;
 					padding: 0.25rem 0.75rem;
-					border-radius: 8px;
+					border-radius: 6px;
 					position: absolute;
 					transform: translate(0, 0);
 					transition: 200ms ease-in-out;
@@ -74,9 +78,5 @@
 				}
 			}
 		}
-	}
-	&:not(.shrinked):hover {
-		background-color: colors.$black;
-		border-radius: 5px;
 	}
 }
