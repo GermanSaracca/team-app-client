@@ -12,6 +12,7 @@
 
 	.player_info {
 		color: colors.$white;
+		pointer-events: none;
 
 		p {
 			font-weight: 700;

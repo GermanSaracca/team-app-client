@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import style from './index.module.scss';
 import FieldColumn from './FieldColumn';
+import { useAppSelector } from '@/hooks/reduxHooks';
+import FieldDroppableSpot from './FieldDroppableSpot';
+import classNames from 'classnames';
 
-interface Props {
-	formation: string;
-}
-
-const FormationField = ({ formation }: Props) => {
+const FormationField = () => {
+	const { formation } = useAppSelector(state => state.formation);
 	const [columnsToMap, setColumnsToMap] = useState<number[]>([]);
 
 	useEffect(() => {
-		const formationColumns = formation.split('-').map(e => Number(e)); // '4-3-3' => ['4','3','3']
+		const formationColumns = formation.value.split('-').map(e => Number(e)); // '4-3-3' => ['4','3','3']
 
 		setColumnsToMap(formationColumns);
-	}, [formation]);
+	}, [formation.value]);
 
 	return (
 		<div className={style.formation_field}>
@@ -32,10 +32,15 @@ const FormationField = ({ formation }: Props) => {
 			</div>
 			<div className={style.positions_container}>
 				{/* Arquero fijo */}
-				<FieldColumn positionsNumber={1} />
+				<div className={classNames(style.player_position, { [style.goalkeeper]: true })}>
+					<FieldDroppableSpot />
+				</div>
+				{/* JUGADORES */}
+
+				{/* <FieldColumn positionsNumber={1} columnNumber={0} />
 				{columnsToMap.map((col, i) => (
-					<FieldColumn positionsNumber={col} key={i} />
-				))}
+					<FieldColumn positionsNumber={col} columnNumber={i + 1} key={formation.value + i} />
+				))} */}
 			</div>
 		</div>
 	);

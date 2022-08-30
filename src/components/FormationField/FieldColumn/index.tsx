@@ -3,8 +3,10 @@ import style from './index.module.scss';
 
 interface Props {
 	positionsNumber: number;
+	columnNumber: number;
 }
-const FieldColumn = ({ positionsNumber }: Props) => {
+
+const FieldColumn = ({ positionsNumber, columnNumber }: Props) => {
 	return (
 		<div className={style.field_column}>
 			{Array(positionsNumber)
