@@ -1,67 +1,65 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useState, memo } from 'react';
 import {
 	addPlayerToField,
-	setPlayerToReplaceOnOrigin,
-	setPlayerIdToReplace,
+	removePlayerFromField,
+	replacePlayers,
+	setIsDraggingPlayer,
 } from '@/store/slices/formation';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import PlayerAvatar from '@/components/PlayerAvatar';
-import { Player } from '@/types/Player';
+import { FieldPosition, Player } from '@/types/Player';
 import classNames from 'classnames';
 import style from './index.module.scss';
 import { enableDropping } from '@/utils';
 // import usePrevious from '@/hooks/usePrevious';
 
-// interface Props {
-// 	columnNumber: number;
-// }
+interface Props {
+	fieldPosition: FieldPosition;
+	currentPlayer: Player | null;
+}
 
-const FieldDroppableSpot = () => {
+const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 	const dispatch = useAppDispatch();
-	const { isDraggingPlayer, playerToReplaceOnOrigin, playerIdToReplace } = useAppSelector(
-		state => state.formation
-	);
+	const { isDraggingPlayer } = useAppSelector(state => state.formation);
 	const [isPlayerOnTop, setIsPlayerOnTop] = useState<boolean>(false);
-	const [droppedPlayer, setDroppedPlayer] = useState<Player | null>(null);
+	// const [currentPlayer, setDroppedPlayer] = useState<Player | null>(null);
 
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		if (e.dataTransfer.getData('player-from-list')) {
-			console.log('Agregado player');
 			const playerTransferredData = JSON.parse(e.dataTransfer.getData('player-from-list'));
 
-			// Add player tho the store
-			console.log('despachando jugador ');
-			dispatch(addPlayerToField(playerTransferredData));
-			setDroppedPlayer(playerTransferredData);
+			// Si ya tengo un jugador entonces el que esta va a la lista
+			if (currentPlayer) {
+				// Add player tho the field
+				dispatch(addPlayerToField({ ...playerTransferredData, fieldPosition }));
+				dispatch(removePlayerFromField(currentPlayer));
+			} else {
+				// Add player tho the field
+				dispatch(addPlayerToField({ ...playerTransferredData, fieldPosition }));
+			}
+
 			setIsPlayerOnTop(false);
 		}
 		if (e.dataTransfer.getData('player-from-field')) {
-			console.log('receiving player from field');
 			const playerTransferredData = JSON.parse(e.dataTransfer.getData('player-from-field'));
 
-			// Si el jugador viene desde la cancha y ya tenemos uno
-			if (droppedPlayer) {
-				if (droppedPlayer.id === playerTransferredData.id) {
-					return;
-				}
-				// Player from here to set on the droppable spot from where new player comes [REPLACEMENT]
-				dispatch(setPlayerToReplaceOnOrigin(droppedPlayer));
-				dispatch(setPlayerIdToReplace(playerTransferredData.id));
-				// Set new player in spot
-				setDroppedPlayer(playerTransferredData);
-				// No more on top
-				setIsPlayerOnTop(false);
+			if (!currentPlayer) {
+				dispatch(addPlayerToField({ ...playerTransferredData, fieldPosition }));
+			} else {
+				// Replace one for another in array
+				dispatch(replacePlayers([currentPlayer, playerTransferredData]));
 			}
+			// No more on top
+			setIsPlayerOnTop(false);
 		}
+		dispatch(setIsDraggingPlayer(false));
 	};
 	// The dragenter event is fired when a dragged element or text selection enters a valid drop target.
 	const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-		// console.log('%cJUGADOR ENTRANDO', 'background-color: green;');
 		setIsPlayerOnTop(true);
 	};
 	// The dragleave event is fired when a dragged element or text selection leaves a valid drop target.
 	const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-		// console.log('%cJUGADOR YENDOSE', 'background-color: #ff5500;');
 		setIsPlayerOnTop(false);
 	};
 
@@ -69,15 +67,15 @@ const FieldDroppableSpot = () => {
 		<div
 			className={classNames(style.field_droppable_spot, {
 				[style.is_player_on_top]: isPlayerOnTop,
-				[style.is_dragging_player]: isDraggingPlayer && !droppedPlayer,
-				[style.has_player_inside]: droppedPlayer,
+				[style.is_dragging_player]: isDraggingPlayer && !currentPlayer,
+				[style.has_player_inside]: currentPlayer,
 			})}
 			onDrop={handleDrop}
 			onDragOver={enableDropping}
 			onDragEnter={handleDragEnter}
 			onDragLeave={handleDragLeave}
 		>
-			{droppedPlayer && <PlayerAvatar xy='100%' {...droppedPlayer} />}
+			{currentPlayer && <PlayerAvatar {...currentPlayer} fieldPosition={fieldPosition} xy='100%' />}
 		</div>
 	);
 };

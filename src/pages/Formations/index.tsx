@@ -1,7 +1,8 @@
-import PlayersList from '@/components/PlayersList';
-import FormationField from '@/components/FormationField';
+import PlayersList from '@/components/formations/PlayersList';
+import FormationField from '@/components/formations/FormationField';
 import style from './index.module.scss';
-import FormationSelect from '@/components/FormationSelect';
+import FormationSelect from '@/components/formations/FormationSelect';
+import TeamSizeSelector from '@/components/formations/TeamSizeSelector';
 
 const Formations = () => {
 	return (
@@ -12,7 +13,7 @@ const Formations = () => {
 					<p>Pon el cursor encima del avatar del jugador para comenzar a arrastrarlo.</p>
 				</div>
 				<div className={style.options}>
-					<p>Elegi una formación 👉</p>
+					<TeamSizeSelector />
 					<FormationSelect />
 				</div>
 			</header>

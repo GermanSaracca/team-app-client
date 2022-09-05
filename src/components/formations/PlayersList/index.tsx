@@ -1,9 +1,10 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import PlayerBadge from '../PlayerBadge';
+import PlayerBadge from '../../PlayerBadge';
 import style from './index.module.scss';
-import { removePlayerFromField } from '@/store/slices/formation';
+import { removePlayerFromField, resetFormation } from '@/store/slices/formation';
 import { enableDropping } from '@/utils';
+import { GrPowerReset } from 'react-icons/gr';
 
 const PlayersList = () => {
 	const { playersInList } = useAppSelector(state => state.formation);
@@ -12,7 +13,6 @@ const PlayersList = () => {
 	// When
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		if (e.dataTransfer.getData('player-from-field')) {
-			console.log('receiving player from field');
 			const playerTransferredData = JSON.parse(e.dataTransfer.getData('player-from-field'));
 
 			dispatch(removePlayerFromField(playerTransferredData));
@@ -21,8 +21,12 @@ const PlayersList = () => {
 
 	return (
 		<div className={style.players_list_container} onDrop={handleDrop} onDragOver={enableDropping}>
-			{/* TODO: Quitar cantidad o poner de dfte manera */}
-			<p>Cantidad de jugadores: {playersInList.length}</p>
+			<div className={style.total_players_in_list}>
+				<small>Jugadores disponibles: {playersInList.length}</small>
+				<button onClick={() => dispatch(resetFormation())} title='Reset formation'>
+					<GrPowerReset />
+				</button>
+			</div>
 			<ul className={style.players_list}>
 				{playersInList.map(({ fullName, position, avatar, id }) => {
 					return (
@@ -32,6 +36,7 @@ const PlayersList = () => {
 					);
 				})}
 			</ul>
+			<div className={style.bottom_gradient} />
 		</div>
 	);
 };

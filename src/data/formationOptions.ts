@@ -1,6 +1,6 @@
-import { OptionType } from '@/types/OptionType';
+import { FormationOptionType } from '@/types/FormationOptionType';
 
-export const FORMATION_OPTIONS: OptionType[] = [
+export const FORMATION_OPTIONS: FormationOptionType[] = [
 	{
 		value: '3-4-3',
 		label: '3-4-3',

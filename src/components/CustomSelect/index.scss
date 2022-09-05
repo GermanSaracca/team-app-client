@@ -1,10 +1,14 @@
 @use '../../styles/colors';
 
 .custom-select {
+	$custom-height: 30px;
+
 	width: 100% !important;
 
 	&__control {
+		min-height: $custom-height !important;
 		border: 0 !important;
+		box-shadow: 0 0 0 2px colors.$spanish-green !important;
 	}
 	&__control--is-focused {
 		box-shadow: 0 0 0 2px colors.$primary !important;
@@ -29,8 +33,11 @@
 	}
 	&__clear-indicator,
 	&__dropdown-indicator {
-		// display: grid !important;
-		// place-items: center !important;
+		display: grid !important;
+		place-items: center !important;
+		height: $custom-height !important;
+		padding: 0 !important;
+		// background-color: red;
 		// height: $label-select-file-height !important;
 		// padding: 0 $space_half !important;
 		// background-color: transparent !important;

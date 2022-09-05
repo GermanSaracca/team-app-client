@@ -5,7 +5,7 @@ import style from './index.module.scss';
 const PlayerBadge = ({ ...props }: Player) => {
 	return (
 		<div className={style.player_badge}>
-			<PlayerAvatar xy={70} {...props} />
+			<PlayerAvatar xy={50} {...props} />
 			<div className={style.player_info}>
 				<p>{props.fullName}</p>
 				<small>{props.position}</small>
