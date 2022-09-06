@@ -3,7 +3,7 @@ import FieldDroppableSpot from './FieldDroppableSpot';
 import { enableDropping } from '@/utils';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import classNames from 'classnames';
-import { FieldPosition, FormationOptionType, Player } from '@/types';
+import { FieldPosition, Player } from '@/types';
 import style from './index.module.scss';
 
 interface DroppablePosition {
@@ -16,9 +16,9 @@ const FormationField = () => {
 
 	const [droppables, setDroppables] = useState<DroppablePosition[]>([]);
 
-	const getGridColumnsByFormation = (formation: FormationOptionType) => {
-		return formation.value.split('-').map(e => Number(e)).length; // '4-3-3' => ['4','3','3'] => 3
-	};
+	// const getGridColumnsByFormation = (formation: FormationOptionType) => {
+	// 	return formation.value.split('-').map(e => Number(e)).length; // '4-3-3' => ['4','3','3'] => 3
+	// };
 
 	useEffect(() => {
 		const newArray: DroppablePosition[] = Array(teamSize)
@@ -60,14 +60,15 @@ const FormationField = () => {
 			</div>
 			<div
 				className={classNames(style.positions_container, {
+					[style.positions_5]: teamSize === 5,
 					[style.positions_6]: teamSize === 6,
 					[style.positions_7]: teamSize === 7,
 					[style.positions_8]: teamSize === 8,
 					[style.positions_9]: teamSize === 9,
 					[style.positions_10]: teamSize === 10,
 					[style.positions_11]: teamSize === 11,
-					[style[`formation_${formation.value}`]]: true,
-					[style[`columns_${getGridColumnsByFormation(formation)}`]]: true,
+					[style[`formation_${formation}`]]: true,
+					// [style[`columns_${getGridColumnsByFormation(formation)}`]]: true,
 				})}
 				onDragOver={enableDropping}
 			>

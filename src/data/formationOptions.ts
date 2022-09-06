@@ -10,10 +10,6 @@ export const FORMATION_OPTIONS: FormationOptionType[] = [
 		label: '3-5-2',
 	},
 	{
-		value: '3-3-2-1',
-		label: '3-3-2-1',
-	},
-	{
 		value: '4-3-3',
 		label: '4-3-3',
 	},
@@ -37,8 +33,29 @@ export const FORMATION_OPTIONS: FormationOptionType[] = [
 		value: '5-4-1',
 		label: '5-4-1',
 	},
+	// 10 PLAYERS FORMATIONS
 	{
-		value: '5-2-1-2',
-		label: '5-2-1-2',
+		value: '2-4-3',
+		label: '2-4-3',
+	},
+	{
+		value: '3-3-3',
+		label: '3-3-3',
+	},
+	{
+		value: '3-4-2',
+		label: '3-4-2',
+	},
+	{
+		value: '3-2-4',
+		label: '3-2-4',
+	},
+	{
+		value: '4-3-2',
+		label: '4-3-2',
+	},
+	{
+		value: '4-2-3',
+		label: '4-2-3',
 	},
 ];

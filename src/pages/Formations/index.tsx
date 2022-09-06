@@ -14,7 +14,7 @@ const Formations = () => {
 				</div>
 				<div className={style.options}>
 					<TeamSizeSelector />
-					<FormationSelect />
+					<FormationSelect minWidth={110} />
 				</div>
 			</header>
 			{/* PLAYERS LIST */}

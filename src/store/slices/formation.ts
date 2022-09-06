@@ -8,7 +8,7 @@ import { PLAYERS } from '@/data/players';
 
 // Define a type for the slice state
 interface FormationState {
-	formation: FormationOptionType;
+	formation: string;
 	teamSize: number;
 	playersInField: Player[];
 	playersInList: Player[];
@@ -17,7 +17,7 @@ interface FormationState {
 
 // Define the initial state using that type
 const initialState: FormationState = {
-	formation: FORMATION_OPTIONS[0],
+	formation: FORMATION_OPTIONS[0].value,
 	teamSize: 11,
 	playersInField: [],
 	playersInList: PLAYERS,
@@ -29,7 +29,7 @@ export const formationSlice = createSlice({
 	// `createSlice` will infer the state type from the `initialState` argument
 	initialState,
 	reducers: {
-		setFormation: (state, action: PayloadAction<FormationOptionType>) => {
+		setFormation: (state, action: PayloadAction<string>) => {
 			state.formation = action.payload;
 		},
 		setTeamSize: (state, action: PayloadAction<number>) => {
