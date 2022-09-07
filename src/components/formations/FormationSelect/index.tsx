@@ -31,7 +31,6 @@ const FormationSelect = ({ minWidth = 'unset' }: { minWidth?: number | string })
 
 	// Add formation selected to the store
 	const handleChange = (selected: FormationOptionType | unknown) => {
-		console.log('changed');
 		dispatch(setFormation((selected as FormationOptionType).value));
 	};
 	const formationSize = (formationString: string) => {
@@ -50,7 +49,7 @@ const FormationSelect = ({ minWidth = 'unset' }: { minWidth?: number | string })
 				options={FORMATION_OPTIONS.filter(option => formationSize(option.value) === teamSize)}
 				defaultValue={FORMATION_OPTIONS.find(option => option.value === formation)}
 				value={value}
-				hideSelectedOptions
+				// hideSelectedOptions
 				onChange={handleChange}
 			/>
 		</div>

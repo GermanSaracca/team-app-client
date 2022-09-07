@@ -26,7 +26,7 @@ const TeamSizeSelector = () => {
 				options={FORMATION_SIZES}
 				defaultValue={FORMATION_SIZES.find(size => size.value === teamSize)}
 				value={value}
-				hideSelectedOptions
+				// hideSelectedOptions
 				onChange={handleChange}
 			/>
 		</div>

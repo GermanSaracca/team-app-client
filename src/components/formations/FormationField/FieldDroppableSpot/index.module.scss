@@ -10,6 +10,12 @@
 	background-color: rgba(lightseagreen, 0.3);
 	border: solid 3px lightseagreen;
 	transition: transform 250ms ease-in-out;
+	// position: relative;
+
+	&:hover .arrows_container {
+		display: block;
+		visibility: visible;
+	}
 
 	@keyframes pulse {
 		0% {
@@ -49,9 +55,88 @@
 	&.has_player_inside {
 		transform: scale(1);
 		border-width: 0;
-		outline: solid 3px lightseagreen;
+		// outline: solid 3px lightseagreen; //TODO: Add yes or no ?
 	}
 	&.is_player_on_top.has_player_inside {
 		transform: scale(1.4);
+	}
+
+	.arrows_container {
+		// display: none;
+		// visibility: hidden;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		// border: solid 1px red;
+
+		$arrow-spacing: 5px;
+		// overflow: hidden;
+
+		svg {
+			filter: drop-shadow(0 0 2px black);
+		}
+		.arrow_up {
+			position: absolute;
+			bottom: calc(100% + $arrow-spacing);
+			left: calc(50% - 10px);
+		}
+		.arrow_up_right {
+			position: absolute;
+			bottom: calc(75% + $arrow-spacing);
+			left: 95%;
+			transform: rotate(5deg);
+		}
+		.arrow_right {
+			position: absolute;
+			top: calc(50% - 10px);
+			left: calc(100% + $arrow-spacing);
+		}
+		.arrow_down_right {
+			position: absolute;
+			top: calc(70% + $arrow-spacing);
+			left: 100%;
+		}
+		.arrow_down {
+			position: absolute;
+			top: calc(100% + $arrow-spacing);
+			left: calc(50% - 10px);
+		}
+
+		.arrow_down_left {
+			position: absolute;
+			top: calc(70% + $arrow-spacing);
+			right: 100%;
+		}
+		.arrow_left {
+			position: absolute;
+			top: calc(50% - 10px);
+			right: calc(100% + $arrow-spacing);
+		}
+		.arrow_up_left {
+			position: absolute;
+			bottom: calc(70% + $arrow-spacing);
+			right: 100%;
+		}
+	}
+
+	.arrow {
+		// background-color: white;
+		// height: 4px;
+		// position: absolute;
+		// top: 50%;
+		// left: 50%;
+		// width: variables.$avatar-width;
+		// transform: rotate(90deg);
+		// transform-origin: left;
+
+		// filter: drop-shadow(0 0 2px black);
+		// border: solid 1px red;
+
+		// svg {
+		// 	width: inherit;
+		// 	height: inherit;
+		// }
 	}
 }

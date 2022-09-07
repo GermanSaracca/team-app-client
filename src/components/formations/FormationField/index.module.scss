@@ -137,7 +137,7 @@
 		// &.positions_11 {
 		// 	border: solid 2px red;
 		// }
-		//** 11 PLAYERS FORMATIONS **//
+		//** START 11 PLAYERS FORMATIONS **//
 		&.formation_3-4-3 {
 			.player {
 				&__2 {
@@ -565,20 +565,705 @@
 		}
 		/** END 11 PLAYERS FORMATIONS */
 
-		&.positions_5 {
+		/** START 10 PLAYERS FORMATIONS */
+		&.formation_2-4-3 {
+			.player {
+				&__2 {
+					left: 20%;
+					top: calc(25% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					bottom: calc(25% - (variables.$avatar-height / 2));
+				}
+
+				&__4 {
+					left: 45%;
+					top: calc(10% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 42%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 42%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 45%;
+					bottom: calc(10% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 75%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 70%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__10 {
+					left: 75%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+			}
 		}
-		&.positions_6 {
+
+		&.formation_3-3-3 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 22%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 50%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 45%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 50%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 75%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 70%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__10 {
+					left: 75%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+			}
 		}
-		&.positions_7 {
+
+		&.formation_3-4-2 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 22%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 50%;
+					top: calc(10% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 42%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 42%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 50%;
+					bottom: calc(10% - (variables.$avatar-height / 2));
+				}
+
+				&__9 {
+					left: 75%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__10 {
+					left: 75%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+			}
 		}
-		&.positions_8 {
+
+		&.formation_3-2-4 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 22%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 45%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 45%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+
+				&__7 {
+					left: 75%;
+					top: calc(10% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 70%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 70%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__10 {
+					left: 75%;
+					bottom: calc(10% - (variables.$avatar-height / 2));
+				}
+			}
 		}
-		&.positions_9 {
+
+		&.formation_4-3-2 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(10% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 18%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 18%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 22%;
+					bottom: calc(10% - (variables.$avatar-height / 2));
+				}
+
+				&__6 {
+					left: 48%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 42%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 48%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__9 {
+					left: 70%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__10 {
+					left: 70%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+			}
 		}
-		&.positions_10 {
+
+		&.formation_4-2-3 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(10% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 18%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 18%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 22%;
+					bottom: calc(10% - (variables.$avatar-height / 2));
+				}
+
+				&__6 {
+					left: 45%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 45%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 70%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 75%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__10 {
+					left: 70%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+			}
 		}
-		&.positions_11 {
+		/** END 10 PLAYERS FORMATIONS */
+
+		/** START 9 PLAYERS FORMATIONS */
+		&.formation_2-3-3 {
+			.player {
+				&__2 {
+					left: 20%;
+					top: calc(25% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					bottom: calc(25% - (variables.$avatar-height / 2));
+				}
+
+				&__4 {
+					left: 45%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 42%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 45%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__7 {
+					left: 75%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 72%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 75%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+			}
 		}
+		&.formation_2-4-2 {
+			.player {
+				&__2 {
+					left: 20%;
+					top: calc(25% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					bottom: calc(25% - (variables.$avatar-height / 2));
+				}
+
+				&__4 {
+					left: 50%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 42%;
+					top: calc(40% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 42%;
+					bottom: calc(40% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 50%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 75%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 75%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_3-2-3 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 22%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 45%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 45%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+
+				&__7 {
+					left: 70%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 75%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 70%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_3-3-2 {
+			.player {
+				&__2 {
+					left: 25%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 25%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 55%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 42%;
+					bottom: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 55%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 75%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 75%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_4-2-2 {
+			.player {
+				&__2 {
+					left: 25%;
+					top: calc(10% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 18%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 18%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 25%;
+					bottom: calc(10% - (variables.$avatar-height / 2));
+				}
+
+				&__6 {
+					left: 45%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 45%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 75%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__9 {
+					left: 75%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_4-3-1 {
+			.player {
+				&__2 {
+					left: 25%;
+					top: calc(10% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 18%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 18%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 25%;
+					bottom: calc(10% - (variables.$avatar-height / 2));
+				}
+
+				&__6 {
+					left: 55%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 42%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 55%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__9 {
+					left: 75%;
+					bottom: calc(50% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		/** END 9 PLAYERS FORMATIONS */
+
+		/** START 8 PLAYERS FORMATIONS */
+		&.formation_2-3-2 {
+			.player {
+				&__2 {
+					left: 20%;
+					top: calc(25% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					bottom: calc(25% - (variables.$avatar-height / 2));
+				}
+
+				&__4 {
+					left: 55%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 42%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 55%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__7 {
+					left: 75%;
+					top: calc(25% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 75%;
+					bottom: calc(25% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_2-3-1-1 {
+			.player {
+				&__2 {
+					left: 20%;
+					top: calc(25% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					bottom: calc(25% - (variables.$avatar-height / 2));
+				}
+
+				&__4 {
+					left: calc(50% - (variables.$avatar-width / 2));
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: 35%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: calc(50% - (variables.$avatar-width / 2));
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__7 {
+					right: 35%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 75%;
+					bottom: calc(50% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_2-2-3 {
+			.player {
+				&__2 {
+					left: 20%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+
+				&__4 {
+					left: calc(50% - (variables.$avatar-width / 2));
+					top: calc(25% - (variables.$avatar-height / 2));
+				}
+				&__5 {
+					left: calc(50% - (variables.$avatar-width / 2));
+					bottom: calc(25% - (variables.$avatar-height / 2));
+				}
+
+				&__6 {
+					left: 72%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 75%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 72%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_3-2-2 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 22%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 45%;
+					top: calc(35% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 45%;
+					bottom: calc(35% - (variables.$avatar-height / 2));
+				}
+
+				&__7 {
+					left: 70%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__8 {
+					left: 70%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_3-3-1 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 22%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 52%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 42%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__7 {
+					left: 52%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 75%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		&.formation_3-2-1-1 {
+			.player {
+				&__2 {
+					left: 22%;
+					top: calc(15% - (variables.$avatar-height / 2));
+				}
+				&__3 {
+					left: 20%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+				&__4 {
+					left: 22%;
+					bottom: calc(15% - (variables.$avatar-height / 2));
+				}
+
+				&__5 {
+					left: 45%;
+					top: calc(30% - (variables.$avatar-height / 2));
+				}
+				&__6 {
+					left: 45%;
+					bottom: calc(30% - (variables.$avatar-height / 2));
+				}
+
+				&__7 {
+					left: 60%;
+					top: calc(50% - (variables.$avatar-height / 2));
+				}
+
+				&__8 {
+					left: 75%;
+					bottom: calc(50% - (variables.$avatar-height / 2));
+				}
+			}
+		}
+		/** END 8 PLAYERS FORMATIONS */
+
 		// display: grid;
 		// grid-auto-flow: column;
 		// grid-gap: 10px;

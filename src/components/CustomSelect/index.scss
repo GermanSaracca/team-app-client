@@ -81,7 +81,9 @@
 			background-color: colors.$primary !important;
 		}
 		&--is-selected {
-			background-color: lighten($color: colors.$primary, $amount: 30) !important;
+			color: colors.$white !important;
+			background-color: colors.$spanish-green !important;
+			pointer-events: none;
 		}
 	}
 	&__value-container {

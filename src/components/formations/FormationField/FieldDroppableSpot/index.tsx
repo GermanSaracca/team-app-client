@@ -8,9 +8,21 @@ import {
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import PlayerAvatar from '@/components/PlayerAvatar';
 import { FieldPosition, Player } from '@/types/Player';
+import { enableDropping } from '@/utils';
+// import { BsArrowUp } from 'react-icons/bs';
+import {
+	ImArrowDown,
+	ImArrowDownLeft,
+	ImArrowLeft,
+	ImArrowUpLeft,
+	ImArrowUp,
+	ImArrowUpRight,
+	ImArrowRight,
+	ImArrowDownRight,
+} from 'react-icons/im';
 import classNames from 'classnames';
 import style from './index.module.scss';
-import { enableDropping } from '@/utils';
+
 // import usePrevious from '@/hooks/usePrevious';
 
 interface Props {
@@ -76,6 +88,16 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 			onDragLeave={handleDragLeave}
 		>
 			{currentPlayer && <PlayerAvatar {...currentPlayer} fieldPosition={fieldPosition} xy='100%' />}
+			<div className={style.arrows_container}>
+				<ImArrowDown size={20} className={style.arrow_down} />
+				<ImArrowDownLeft size={20} className={style.arrow_down_left} />
+				<ImArrowLeft size={20} className={style.arrow_left} />
+				<ImArrowUpLeft size={20} className={style.arrow_up_left} />
+				<ImArrowUp size={20} className={style.arrow_up} />
+				<ImArrowUpRight size={20} className={style.arrow_up_right} />
+				<ImArrowRight size={20} className={style.arrow_right} />
+				<ImArrowDownRight size={20} className={style.arrow_down_right} />
+			</div>
 		</div>
 	);
 };
