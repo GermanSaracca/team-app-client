@@ -10,12 +10,7 @@
 	background-color: rgba(lightseagreen, 0.3);
 	border: solid 3px lightseagreen;
 	transition: transform 250ms ease-in-out;
-	// position: relative;
-
-	&:hover .arrows_container {
-		display: block;
-		visibility: visible;
-	}
+	z-index: 2;
 
 	@keyframes pulse {
 		0% {
@@ -60,22 +55,43 @@
 	&.is_player_on_top.has_player_inside {
 		transform: scale(1.4);
 	}
-
-	.arrows_container {
-		// display: none;
-		// visibility: hidden;
-		width: 100%;
-		height: 100%;
+	.arrows_selection_area {
+		display: grid;
+		place-items: center;
 		position: absolute;
-		top: 0;
-		left: 0;
-		// border: solid 1px red;
+		width: 180%;
+		height: 180%;
+		top: -40%;
+		left: -40%;
+		// border-radius: 50%;
+		// transition: all ease-in-out 150ms;
+
+		&:hover {
+			.arrows_container {
+				display: block;
+				visibility: visible;
+			}
+		}
+	}
+	.arrows_container {
+		display: none;
+		visibility: hidden;
+		width: variables.$avatar-width;
+		height: variables.$avatar-height;
+		position: relative;
 
 		$arrow-spacing: 5px;
-		// overflow: hidden;
 
 		svg {
 			filter: drop-shadow(0 0 2px black);
+			opacity: 0.3;
+			transition: 100ms ease;
+
+			&:hover {
+				opacity: 1;
+				transform: scale(1.1);
+				cursor: pointer;
+			}
 		}
 		.arrow_up {
 			position: absolute;
@@ -84,9 +100,8 @@
 		}
 		.arrow_up_right {
 			position: absolute;
-			bottom: calc(75% + $arrow-spacing);
-			left: 95%;
-			transform: rotate(5deg);
+			bottom: calc(80% + $arrow-spacing);
+			left: 90%;
 		}
 		.arrow_right {
 			position: absolute;
@@ -95,8 +110,8 @@
 		}
 		.arrow_down_right {
 			position: absolute;
-			top: calc(70% + $arrow-spacing);
-			left: 100%;
+			top: calc(80% + $arrow-spacing);
+			left: 90%;
 		}
 		.arrow_down {
 			position: absolute;
@@ -106,8 +121,8 @@
 
 		.arrow_down_left {
 			position: absolute;
-			top: calc(70% + $arrow-spacing);
-			right: 100%;
+			top: calc(80% + $arrow-spacing);
+			right: 95%;
 		}
 		.arrow_left {
 			position: absolute;
@@ -116,27 +131,8 @@
 		}
 		.arrow_up_left {
 			position: absolute;
-			bottom: calc(70% + $arrow-spacing);
-			right: 100%;
+			bottom: calc(80% + $arrow-spacing);
+			right: 95%;
 		}
-	}
-
-	.arrow {
-		// background-color: white;
-		// height: 4px;
-		// position: absolute;
-		// top: 50%;
-		// left: 50%;
-		// width: variables.$avatar-width;
-		// transform: rotate(90deg);
-		// transform-origin: left;
-
-		// filter: drop-shadow(0 0 2px black);
-		// border: solid 1px red;
-
-		// svg {
-		// 	width: inherit;
-		// 	height: inherit;
-		// }
 	}
 }

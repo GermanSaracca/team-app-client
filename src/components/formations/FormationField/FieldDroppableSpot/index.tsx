@@ -1,5 +1,6 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import {
+	addPlayerFromFieldToEmptySpot,
 	addPlayerToField,
 	removePlayerFromField,
 	replacePlayers,
@@ -30,11 +31,35 @@ interface Props {
 	currentPlayer: Player | null;
 }
 
+interface IArrowsActive {
+	arrow_up: boolean;
+	arrow_up_right: boolean;
+	arrow_right: boolean;
+	arrow_down_right: boolean;
+	arrow_down: boolean;
+	arrow_down_left: boolean;
+	arrow_left: boolean;
+	arrow_up_left: boolean;
+}
+
 const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 	const dispatch = useAppDispatch();
 	const { isDraggingPlayer } = useAppSelector(state => state.formation);
 	const [isPlayerOnTop, setIsPlayerOnTop] = useState<boolean>(false);
-	// const [currentPlayer, setDroppedPlayer] = useState<Player | null>(null);
+	const [arrowsActive, setArrowsActive] = useState<IArrowsActive>({
+		arrow_up: false,
+		arrow_up_right: false,
+		arrow_right: false,
+		arrow_down_right: false,
+		arrow_down: false,
+		arrow_down_left: false,
+		arrow_left: false,
+		arrow_up_left: false,
+	});
+
+	useEffect(() => {
+		console.log({ arrowsActive });
+	}, [arrowsActive]);
 
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		if (e.dataTransfer.getData('player-from-list')) {
@@ -42,21 +67,28 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 
 			// Si ya tengo un jugador entonces el que esta va a la lista
 			if (currentPlayer) {
-				// Add player tho the field
-				dispatch(addPlayerToField({ ...playerTransferredData, fieldPosition }));
 				dispatch(removePlayerFromField(currentPlayer));
-			} else {
-				// Add player tho the field
-				dispatch(addPlayerToField({ ...playerTransferredData, fieldPosition }));
 			}
+			// Add player tho the field
+			dispatch(addPlayerToField({ ...playerTransferredData, fieldPosition }));
 
 			setIsPlayerOnTop(false);
 		}
 		if (e.dataTransfer.getData('player-from-field')) {
+			console.log('from field');
 			const playerTransferredData = JSON.parse(e.dataTransfer.getData('player-from-field'));
 
 			if (!currentPlayer) {
-				dispatch(addPlayerToField({ ...playerTransferredData, fieldPosition }));
+				/**
+				 * If currentPlayer is null means that we are draggin a player to one empty spot, so we need to delete
+				 * that player in that spot and add it to the desire spot
+				 */
+				dispatch(
+					addPlayerFromFieldToEmptySpot([
+						playerTransferredData,
+						{ ...playerTransferredData, fieldPosition },
+					])
+				);
 			} else {
 				// Replace one for another in array
 				dispatch(replacePlayers([currentPlayer, playerTransferredData]));
@@ -75,6 +107,13 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 		setIsPlayerOnTop(false);
 	};
 
+	const handleArrowActive = (arrow: string) => {
+		setArrowsActive(s => ({
+			...s,
+			[arrow]: !s[arrow as keyof IArrowsActive],
+		}));
+	};
+
 	return (
 		<div
 			className={classNames(style.field_droppable_spot, {
@@ -88,16 +127,54 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 			onDragLeave={handleDragLeave}
 		>
 			{currentPlayer && <PlayerAvatar {...currentPlayer} fieldPosition={fieldPosition} xy='100%' />}
-			<div className={style.arrows_container}>
-				<ImArrowDown size={20} className={style.arrow_down} />
-				<ImArrowDownLeft size={20} className={style.arrow_down_left} />
-				<ImArrowLeft size={20} className={style.arrow_left} />
-				<ImArrowUpLeft size={20} className={style.arrow_up_left} />
-				<ImArrowUp size={20} className={style.arrow_up} />
-				<ImArrowUpRight size={20} className={style.arrow_up_right} />
-				<ImArrowRight size={20} className={style.arrow_right} />
-				<ImArrowDownRight size={20} className={style.arrow_down_right} />
-			</div>
+			{currentPlayer && (
+				<div className={style.arrows_selection_area}>
+					<div className={style.arrows_container}>
+						<ImArrowDown
+							size={20}
+							className={classNames(style.arrow_down, {
+								isActive: arrowsActive.arrow_down,
+							})}
+							onClick={() => handleArrowActive('arrow_down')}
+						/>
+						<ImArrowDownLeft
+							size={20}
+							className={style.arrow_down_left}
+							onClick={() => handleArrowActive('arrow_down_left')}
+						/>
+						<ImArrowLeft
+							size={20}
+							className={style.arrow_left}
+							onClick={() => handleArrowActive('arrow_left')}
+						/>
+						<ImArrowUpLeft
+							size={20}
+							className={style.arrow_up_left}
+							onClick={() => handleArrowActive('arrow_up_left')}
+						/>
+						<ImArrowUp
+							size={20}
+							className={style.arrow_up}
+							onClick={() => handleArrowActive('arrow_up')}
+						/>
+						<ImArrowUpRight
+							size={20}
+							className={style.arrow_up_right}
+							onClick={() => handleArrowActive('arrow_up_right')}
+						/>
+						<ImArrowRight
+							size={20}
+							className={style.arrow_right}
+							onClick={() => handleArrowActive('arrow_right')}
+						/>
+						<ImArrowDownRight
+							size={20}
+							className={style.arrow_down_right}
+							onClick={() => handleArrowActive('arrow_down_right')}
+						/>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
