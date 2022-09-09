@@ -32,8 +32,4 @@
 		overflow-x: hidden;
 		@include mixins.custom-scrollbar(6px, transparent, rgba(255, 255, 255, 0.25));
 	}
-
-	.main_header {
-		background-color: red;
-	}
 }

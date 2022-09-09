@@ -1,0 +1,26 @@
+@use '../../../styles/colors';
+
+.sound_toggle {
+	display: grid;
+	place-items: center;
+	height: 100%;
+	width: fit-content;
+	margin-left: auto;
+	position: relative;
+	cursor: pointer;
+
+	&.off_sound {
+		&::after {
+			content: '';
+			position: absolute;
+			top: calc(50% - 2px);
+			left: -2px;
+			transform: rotate(315deg);
+			width: 120%;
+			height: 2px;
+			background-color: colors.$white;
+			background-color: colors.$primary;
+			outline: solid 2px colors.$black;
+		}
+	}
+}

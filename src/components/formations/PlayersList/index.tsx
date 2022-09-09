@@ -5,10 +5,14 @@ import style from './index.module.scss';
 import { removePlayerFromField, resetFormation } from '@/store/slices/formation';
 import { enableDropping } from '@/utils';
 import { GrPowerReset } from 'react-icons/gr';
+import useSound from 'use-sound';
+import pinbalSound from '../../../assets/audio/pinbal.wav';
 
 const PlayersList = () => {
 	const { playersInList } = useAppSelector(state => state.formation);
+	const { withSound } = useAppSelector(state => state.sound);
 	const dispatch = useAppDispatch();
+	const [play] = useSound(pinbalSound);
 
 	// When
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -16,6 +20,7 @@ const PlayersList = () => {
 			const playerTransferredData = JSON.parse(e.dataTransfer.getData('player-from-field'));
 
 			dispatch(removePlayerFromField(playerTransferredData));
+			withSound && play();
 		}
 	};
 

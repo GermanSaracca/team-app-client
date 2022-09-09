@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { counterSlice } from './slices/counter';
 import { formationSlice } from './slices/formation';
-// ...
+import { soundSlice } from './slices/sound';
 
 export const store = configureStore({
 	reducer: {
 		counter: counterSlice.reducer,
 		formation: formationSlice.reducer,
+		sound: soundSlice.reducer,
 	},
 });
 

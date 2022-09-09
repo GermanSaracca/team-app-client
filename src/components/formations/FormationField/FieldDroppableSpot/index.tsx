@@ -21,6 +21,8 @@ import {
 	ImArrowRight,
 	ImArrowDownRight,
 } from 'react-icons/im';
+import useSound from 'use-sound';
+import tapSound from '../../../../assets/audio/tap.wav';
 import classNames from 'classnames';
 import style from './index.module.scss';
 
@@ -45,6 +47,7 @@ interface IArrowsActive {
 const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 	const dispatch = useAppDispatch();
 	const { isDraggingPlayer } = useAppSelector(state => state.formation);
+	const { withSound } = useAppSelector(state => state.sound);
 	const [isPlayerOnTop, setIsPlayerOnTop] = useState<boolean>(false);
 	const [arrowsActive, setArrowsActive] = useState<IArrowsActive>({
 		arrow_up: false,
@@ -57,9 +60,7 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 		arrow_up_left: false,
 	});
 
-	useEffect(() => {
-		console.log(isPlayerOnTop);
-	}, [isPlayerOnTop]);
+	const [play] = useSound(tapSound);
 
 	useEffect(() => {
 		// Reset arrows state
@@ -111,6 +112,7 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 			setIsPlayerOnTop(false);
 		}
 		dispatch(setIsDraggingPlayer(false));
+		withSound && play();
 	};
 	// The dragenter event is fired when a dragged element or text selection enters a valid drop target.
 	const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {

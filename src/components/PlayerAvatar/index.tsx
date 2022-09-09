@@ -9,7 +9,7 @@ interface Props extends Player {
 	xy: number | string;
 }
 
-const PlayerAvatar = ({ avatar, xy, id, fullName, position, fieldPosition }: Props) => {
+const PlayerAvatar = ({ avatar, id, fullName, position, fieldPosition, xy }: Props) => {
 	// usePreventDefaultDragOver(); // TODO :aca o global ? Quita el cursor de prohibido
 
 	const dispatch = useAppDispatch();
