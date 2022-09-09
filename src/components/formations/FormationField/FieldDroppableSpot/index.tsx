@@ -58,8 +58,22 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 	});
 
 	useEffect(() => {
-		console.log({ arrowsActive });
-	}, [arrowsActive]);
+		console.log(isPlayerOnTop);
+	}, [isPlayerOnTop]);
+
+	useEffect(() => {
+		// Reset arrows state
+		setArrowsActive({
+			arrow_up: false,
+			arrow_up_right: false,
+			arrow_right: false,
+			arrow_down_right: false,
+			arrow_down: false,
+			arrow_down_left: false,
+			arrow_left: false,
+			arrow_up_left: false,
+		});
+	}, [currentPlayer, fieldPosition]);
 
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		if (e.dataTransfer.getData('player-from-list')) {
@@ -80,7 +94,7 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 
 			if (!currentPlayer) {
 				/**
-				 * If currentPlayer is null means that we are draggin a player to one empty spot, so we need to delete
+				 * If currentPlayer is null means that we are draggin an in field player to one empty spot, so we need to delete
 				 * that player in that spot and add it to the desire spot
 				 */
 				dispatch(
@@ -93,7 +107,7 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 				// Replace one for another in array
 				dispatch(replacePlayers([currentPlayer, playerTransferredData]));
 			}
-			// No more on top
+
 			setIsPlayerOnTop(false);
 		}
 		dispatch(setIsDraggingPlayer(false));
@@ -133,43 +147,57 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 						<ImArrowDown
 							size={20}
 							className={classNames(style.arrow_down, {
-								isActive: arrowsActive.arrow_down,
+								[style.isActive]: arrowsActive.arrow_down,
 							})}
 							onClick={() => handleArrowActive('arrow_down')}
 						/>
 						<ImArrowDownLeft
 							size={20}
-							className={style.arrow_down_left}
+							className={classNames(style.arrow_down_left, {
+								[style.isActive]: arrowsActive.arrow_down_left,
+							})}
 							onClick={() => handleArrowActive('arrow_down_left')}
 						/>
 						<ImArrowLeft
 							size={20}
-							className={style.arrow_left}
+							className={classNames(style.arrow_left, {
+								[style.isActive]: arrowsActive.arrow_left,
+							})}
 							onClick={() => handleArrowActive('arrow_left')}
 						/>
 						<ImArrowUpLeft
 							size={20}
-							className={style.arrow_up_left}
+							className={classNames(style.arrow_up_left, {
+								[style.isActive]: arrowsActive.arrow_up_left,
+							})}
 							onClick={() => handleArrowActive('arrow_up_left')}
 						/>
 						<ImArrowUp
 							size={20}
-							className={style.arrow_up}
+							className={classNames(style.arrow_up, {
+								[style.isActive]: arrowsActive.arrow_up,
+							})}
 							onClick={() => handleArrowActive('arrow_up')}
 						/>
 						<ImArrowUpRight
 							size={20}
-							className={style.arrow_up_right}
+							className={classNames(style.arrow_up_right, {
+								[style.isActive]: arrowsActive.arrow_up_right,
+							})}
 							onClick={() => handleArrowActive('arrow_up_right')}
 						/>
 						<ImArrowRight
 							size={20}
-							className={style.arrow_right}
+							className={classNames(style.arrow_right, {
+								[style.isActive]: arrowsActive.arrow_right,
+							})}
 							onClick={() => handleArrowActive('arrow_right')}
 						/>
 						<ImArrowDownRight
 							size={20}
-							className={style.arrow_down_right}
+							className={classNames(style.arrow_down_right, {
+								[style.isActive]: arrowsActive.arrow_down_right,
+							})}
 							onClick={() => handleArrowActive('arrow_down_right')}
 						/>
 					</div>

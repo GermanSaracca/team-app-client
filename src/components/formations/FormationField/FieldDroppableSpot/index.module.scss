@@ -55,6 +55,7 @@
 	&.is_player_on_top.has_player_inside {
 		transform: scale(1.4);
 	}
+
 	.arrows_selection_area {
 		display: grid;
 		place-items: center;
@@ -68,14 +69,17 @@
 
 		&:hover {
 			.arrows_container {
-				display: block;
-				visibility: visible;
+				// display: block;
+				// visibility: visible;
+				& > svg {
+					opacity: 0.4;
+				}
 			}
 		}
 	}
 	.arrows_container {
-		display: none;
-		visibility: hidden;
+		// display: none;
+		// visibility: hidden;
 		width: variables.$avatar-width;
 		height: variables.$avatar-height;
 		position: relative;
@@ -83,56 +87,96 @@
 		$arrow-spacing: 5px;
 
 		svg {
-			filter: drop-shadow(0 0 2px black);
-			opacity: 0.3;
+			opacity: 0;
+			filter: drop-shadow(3px 3px 2px black);
 			transition: 100ms ease;
 
 			&:hover {
 				opacity: 1;
-				transform: scale(1.1);
+				transform: scale(1.2);
 				cursor: pointer;
+			}
+			&.isActive {
+				opacity: 1 !important;
+				transform: scale(1.5);
 			}
 		}
 		.arrow_up {
 			position: absolute;
 			bottom: calc(100% + $arrow-spacing);
 			left: calc(50% - 10px);
+
+			&.isActive {
+				bottom: calc(100% + ($arrow-spacing * 2));
+			}
 		}
 		.arrow_up_right {
 			position: absolute;
 			bottom: calc(80% + $arrow-spacing);
 			left: 90%;
+
+			&.isActive {
+				bottom: calc(80% + ($arrow-spacing * 2));
+				left: calc(90% + $arrow-spacing);
+			}
 		}
 		.arrow_right {
 			position: absolute;
 			top: calc(50% - 10px);
 			left: calc(100% + $arrow-spacing);
+
+			&.isActive {
+				left: calc(100% + ($arrow-spacing * 2));
+			}
 		}
 		.arrow_down_right {
 			position: absolute;
 			top: calc(80% + $arrow-spacing);
 			left: 90%;
+
+			&.isActive {
+				top: calc(80% + ($arrow-spacing * 2));
+				left: calc(90% + $arrow-spacing);
+			}
 		}
 		.arrow_down {
 			position: absolute;
 			top: calc(100% + $arrow-spacing);
 			left: calc(50% - 10px);
+
+			&.isActive {
+				top: calc(100% + ($arrow-spacing * 2));
+			}
 		}
 
 		.arrow_down_left {
 			position: absolute;
 			top: calc(80% + $arrow-spacing);
 			right: 95%;
+
+			&.isActive {
+				top: calc(80% + ($arrow-spacing * 2));
+				right: calc(95% + $arrow-spacing);
+			}
 		}
 		.arrow_left {
 			position: absolute;
 			top: calc(50% - 10px);
 			right: calc(100% + $arrow-spacing);
+
+			&.isActive {
+				right: calc(100% + ($arrow-spacing * 2));
+			}
 		}
 		.arrow_up_left {
 			position: absolute;
 			bottom: calc(80% + $arrow-spacing);
 			right: 95%;
+
+			&.isActive {
+				bottom: calc(80% + ($arrow-spacing * 2));
+				right: calc(95% + $arrow-spacing);
+			}
 		}
 	}
 }
