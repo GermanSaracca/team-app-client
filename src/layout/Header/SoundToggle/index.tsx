@@ -8,7 +8,6 @@ const SoundToggle = () => {
 	const { withSound } = useAppSelector(state => state.sound);
 	const dispatch = useAppDispatch();
 
-	console.log({ withSound });
 	return (
 		<div
 			className={classNames(style.sound_toggle, { [style.off_sound]: !withSound })}

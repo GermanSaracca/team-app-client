@@ -1,9 +1,7 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { Player } from '@/types/Player';
+import { FieldPosition, Player } from '@/types/Player';
 import { FORMATION_OPTIONS } from '@/data/formationOptions';
-import { FormationOptionType } from '@/types/FormationOptionType';
 import { PLAYERS } from '@/data/players';
 
 // Define a type for the slice state
@@ -23,7 +21,12 @@ const initialState: FormationState = {
 	playersInList: PLAYERS,
 	isDraggingPlayer: false,
 };
-
+/**
+ *  Immer is a library that simplifies the process of writing immutable update logic.
+	Immer provides a function called produce, which accepts two arguments: your original state, and a callback function. The callback function is given a "draft" version of that state, and inside the callback, it is safe to write code that mutates the draft value. Immer tracks all attempts to mutate the draft value and then replays those mutations using their immutable equivalents to create a safe, immutably updated result
+ *  createReducer API uses Immer internally automatically. So, it's already safe to "mutate" state inside of any case reducer 		 function that is passed to createReducer
+ * In turn, createSlice uses createReducer inside, so it's also safe to "mutate" state there as well
+ */
 export const formationSlice = createSlice({
 	name: 'formation',
 	// `createSlice` will infer the state type from the `initialState` argument
@@ -36,15 +39,17 @@ export const formationSlice = createSlice({
 			state.teamSize = action.payload;
 		},
 		addPlayerToField: (state, action: PayloadAction<Player>) => {
-			// Push to Array
+			// Add player to field
 			state.playersInField.push(action.payload);
-			// Order by fieldPosition
+			// Order the update playersInField array
 			state.playersInField.sort((a, b) => Number(a.fieldPosition) - Number(b.fieldPosition));
-			// Remove player from players in list
+			// Then remove player from players in list
 			state.playersInList = state.playersInList.filter(player => player.id !== action.payload.id);
 		},
 		removePlayerFromField: (state, action: PayloadAction<Player>) => {
+			// Remove player from field
 			state.playersInField = state.playersInField.filter(player => player.id !== action.payload.id);
+			// Add player to top of aside list
 			state.playersInList.unshift(action.payload);
 		},
 
@@ -66,15 +71,18 @@ export const formationSlice = createSlice({
 		 * First one is one to delete on that spot of field
 		 * Second one is one to add
 		 */
-		addPlayerFromFieldToEmptySpot: (state, action: PayloadAction<Player[]>) => {
-			// Delete in previous spot
-			const deletePlayerOnSpotIndex = state.playersInField.findIndex(
-				player => player.id === action.payload[0].id
+		changePlayerFieldPosition: (
+			state,
+			action: PayloadAction<{ player: Player; newFieldPosition: FieldPosition }>
+		) => {
+			// Find player to change position
+			const playerToEditFieldPosition = state.playersInField.find(
+				p => p.id === action.payload.player.id
 			);
-			state.playersInField.splice(deletePlayerOnSpotIndex, 1);
 
-			// Add player
-			state.playersInField.push(action.payload[1]);
+			if (playerToEditFieldPosition) {
+				playerToEditFieldPosition.fieldPosition = action.payload.newFieldPosition;
+			}
 		},
 		setIsDraggingPlayer: (state, action: PayloadAction<boolean>) => {
 			state.isDraggingPlayer = action.payload;
@@ -89,14 +97,9 @@ export const {
 	addPlayerToField,
 	removePlayerFromField,
 	replacePlayers,
-	addPlayerFromFieldToEmptySpot,
+	changePlayerFieldPosition,
 	setIsDraggingPlayer,
 	resetFormation,
 } = formationSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-
-// GETTERS
-export const selectIsDraggingPlayer = (state: RootState) => state.formation.isDraggingPlayer;
 
 export default formationSlice.reducer;

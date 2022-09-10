@@ -1,6 +1,6 @@
 import React, { useState, memo, useEffect } from 'react';
 import {
-	addPlayerFromFieldToEmptySpot,
+	changePlayerFieldPosition,
 	addPlayerToField,
 	removePlayerFromField,
 	replacePlayers,
@@ -90,25 +90,22 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 			setIsPlayerOnTop(false);
 		}
 		if (e.dataTransfer.getData('player-from-field')) {
-			console.log('from field');
 			const playerTransferredData = JSON.parse(e.dataTransfer.getData('player-from-field'));
 
 			if (!currentPlayer) {
 				/**
-				 * If currentPlayer is null means that we are draggin an in field player to one empty spot, so we need to delete
-				 * that player in that spot and add it to the desire spot
+				 * If currentPlayer is null means that we are draggin an in field player to one empty spot
 				 */
 				dispatch(
-					addPlayerFromFieldToEmptySpot([
-						playerTransferredData,
-						{ ...playerTransferredData, fieldPosition },
-					])
+					changePlayerFieldPosition({
+						player: playerTransferredData,
+						newFieldPosition: fieldPosition,
+					})
 				);
 			} else {
 				// Replace one for another in array
 				dispatch(replacePlayers([currentPlayer, playerTransferredData]));
 			}
-
 			setIsPlayerOnTop(false);
 		}
 		dispatch(setIsDraggingPlayer(false));

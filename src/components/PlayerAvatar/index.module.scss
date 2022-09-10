@@ -9,7 +9,6 @@
 	transition: all 150ms ease-in-out;
 	will-change: transform;
 	overflow: hidden;
-	cursor: grab;
 	position: relative;
 	z-index: 1;
 
@@ -19,12 +18,15 @@
 		pointer-events: none; //To avoid dragging the img tag and not all the PlayerAvatar element
 	}
 
-	&:hover {
-		transform: scale(1.05);
-		box-shadow: none;
-	}
+	&.draggable {
+		cursor: grab;
+		&:hover {
+			transform: scale(1.05);
+			box-shadow: none;
+		}
 
-	&:active {
-		cursor: grabbing;
+		&:active {
+			cursor: grabbing;
+		}
 	}
 }

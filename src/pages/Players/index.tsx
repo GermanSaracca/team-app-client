@@ -1,12 +1,25 @@
+import PlayerBadge from '@/components/PlayerBadge';
+import { useAppSelector } from '@/hooks/reduxHooks';
+import style from './index.module.scss';
+
 const Players = () => {
+	const { players } = useAppSelector(state => state.players);
+
 	return (
-		<>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, quos aperiam hic quam mollitia
-				suscipit repellat exercitationem fugit minus voluptate enim eligendi repellendus distinctio
-				alias reprehenderit veniam id consequuntur. Alias.
-			</p>
-		</>
+		<div className={style.players_layout}>
+			<ul>
+				{players.map(p => (
+					<PlayerBadge
+						fullName={p.fullName}
+						position={p.position}
+						avatar={p.avatar}
+						id={p.id}
+						key={p.id}
+						avatarDraggable={false}
+					/>
+				))}
+			</ul>
+		</div>
 	);
 };
 export default Players;

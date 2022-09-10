@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { searchLocalStorage, setLocalStorage } from '@/utils/local-storage';
 
 // Define a type for the slice state
 interface FormationState {
@@ -8,7 +9,7 @@ interface FormationState {
 
 // Define the initial state using that type
 const initialState: FormationState = {
-	withSound: true,
+	withSound: searchLocalStorage('withSound', true),
 };
 
 export const soundSlice = createSlice({
@@ -17,8 +18,8 @@ export const soundSlice = createSlice({
 	initialState,
 	reducers: {
 		toggleSound: (state, action: PayloadAction<boolean>) => {
-			console.log(action.payload);
 			state.withSound = action.payload;
+			setLocalStorage('withSound', action.payload);
 		},
 		resetFormation: () => initialState,
 	},
