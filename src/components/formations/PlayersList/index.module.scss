@@ -8,6 +8,8 @@
 	@include mixins.custom-scrollbar(6px, transparent, rgba(255, 255, 255, 0.25));
 	background-color: black;
 	position: relative;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
 }
 .total_players_in_list {
 	display: flex;
@@ -16,7 +18,7 @@
 	position: sticky;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 2;
 	background-color: black;
 	border-bottom: solid 3px colors.$primary;
 	padding: 0.5rem;
@@ -41,14 +43,7 @@
 		}
 	}
 }
-.bottom_gradient {
-	position: sticky;
-	bottom: 0;
-	left: 0;
-	z-index: 1;
-	background-image: linear-gradient(transparent, black);
-	height: 35px;
-}
+
 .players_list {
 	list-style: none;
 	margin: 0;
@@ -58,4 +53,12 @@
 	li:not(:last-child) {
 		margin-bottom: 0.5rem;
 	}
+}
+.bottom_gradient {
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	background-image: linear-gradient(transparent, black);
+	height: 35px;
 }

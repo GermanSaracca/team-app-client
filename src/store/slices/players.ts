@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { Player } from '@/types/Player';
+import { IPlayer } from '@/types/Player';
 import { PLAYERS } from '@/data/players';
 
 // Define a type for the slice state
 interface PlayersState {
-	players: Player[];
+	players: IPlayer[];
 }
 
 // Define the initial state using that type
@@ -18,13 +18,13 @@ export const playersSlice = createSlice({
 	// `createSlice` will infer the state type from the `initialState` argument
 	initialState,
 	reducers: {
-		createPlayer: (state, action: PayloadAction<Player>) => {
+		createPlayer: (state, action: PayloadAction<IPlayer>) => {
 			console.log(action.payload);
 		},
-		editPlayer: (state, action: PayloadAction<Player>) => {
+		editPlayer: (state, action: PayloadAction<IPlayer>) => {
 			console.log(action.payload);
 		},
-		deletePlayer: (state, action: PayloadAction<Player['id']>) => {
+		deletePlayer: (state, action: PayloadAction<IPlayer['id']>) => {
 			console.log(action.payload);
 		},
 	},

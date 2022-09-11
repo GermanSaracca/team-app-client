@@ -1,7 +1,7 @@
 import CustomSelect from '@/components/CustomSelect';
 import { FORMATION_SIZES } from '@/data/formationSizes';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { setTeamSize } from '@/store/slices/formation';
+import { removeAllPlayerFromField, setTeamSize } from '@/store/slices/formation';
 import { TeamSizeOptionType } from '@/types/TeamSizeOptionType';
 import { useEffect, useState } from 'react';
 
@@ -17,6 +17,7 @@ const TeamSizeSelector = () => {
 	// Add team size selected to the store
 	const handleChange = (selected: TeamSizeOptionType | unknown) => {
 		dispatch(setTeamSize((selected as TeamSizeOptionType).value));
+		dispatch(removeAllPlayerFromField());
 	};
 	return (
 		<div>

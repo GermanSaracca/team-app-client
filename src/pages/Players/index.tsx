@@ -7,7 +7,7 @@ const Players = () => {
 
 	return (
 		<div className={style.players_layout}>
-			<ul>
+			<div className={style.players_grid}>
 				{players.map(p => (
 					<PlayerBadge
 						fullName={p.fullName}
@@ -18,7 +18,7 @@ const Players = () => {
 						avatarDraggable={false}
 					/>
 				))}
-			</ul>
+			</div>
 		</div>
 	);
 };

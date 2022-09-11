@@ -8,7 +8,7 @@ import {
 } from '@/store/slices/formation';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import PlayerAvatar from '@/components/PlayerAvatar';
-import { FieldPosition, Player } from '@/types/Player';
+import { IPlayer } from '@/types/Player';
 import { enableDropping } from '@/utils';
 // import { BsArrowUp } from 'react-icons/bs';
 import {
@@ -29,8 +29,8 @@ import style from './index.module.scss';
 // import usePrevious from '@/hooks/usePrevious';
 
 interface Props {
-	fieldPosition: FieldPosition;
-	currentPlayer: Player | null;
+	fieldPosition: IPlayer['fieldPosition'];
+	currentPlayer: IPlayer | null;
 }
 
 interface IArrowsActive {
@@ -140,6 +140,7 @@ const FieldDroppableSpot = ({ fieldPosition, currentPlayer }: Props) => {
 			onDragLeave={handleDragLeave}
 		>
 			{currentPlayer && <PlayerAvatar {...currentPlayer} fieldPosition={fieldPosition} xy='100%' />}
+
 			{currentPlayer && (
 				<div className={style.arrows_selection_area}>
 					<div className={style.arrows_container}>

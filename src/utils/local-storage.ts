@@ -5,9 +5,9 @@ export const searchLocalStorage = (key: string, initialValue: any) => {
 	return localStorageValue ? JSON.parse(localStorageValue) : initialValue;
 };
 export const setLocalStorage = (key: string, value: any) => {
-	return window.localStorage.setItem(key, JSON.stringify(value));
+	window.localStorage.setItem(key, JSON.stringify(value));
 };
 
 export const removeLocalStorage = (key: string) => {
-	return window.localStorage.removeItem(key);
+	window.localStorage.removeItem(key);
 };

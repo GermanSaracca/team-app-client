@@ -7,7 +7,7 @@
 	gap: 1rem;
 	border-radius: 6px;
 	color: #000;
-	@include mixins.shadow-gradient($shadow: false);
+	@include mixins.shadow-gradient();
 	padding: 0.5rem;
 
 	.player_info {

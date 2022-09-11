@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { searchLocalStorage, setLocalStorage } from '@/utils/local-storage';
+import { searchLocalStorage, setLocalStorage } from '@/utils';
 
 // Define a type for the slice state
 interface FormationState {

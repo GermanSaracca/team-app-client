@@ -1,12 +1,13 @@
 import React from 'react';
-import { Player } from '@/types/Player';
+import { IPlayer } from '@/types/Player';
 import style from './index.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { setIsDraggingPlayer } from '@/store/slices/formation';
 import classNames from 'classnames';
+import { firstNameToLetter } from '@/utils';
 // import usePreventDefaultDragOver from '@/hooks/usePreventDefaultDragOver';
 
-interface Props extends Player {
+interface Props extends IPlayer {
 	xy: number | string;
 	draggable?: boolean;
 }
@@ -37,7 +38,7 @@ const PlayerAvatar = ({
 			// We search if current player being dragged is already in the field
 			const isPlayerInField = playersInField.find(player => player.id === id);
 
-			const playerData: Player = {
+			const playerData: IPlayer = {
 				fullName,
 				position,
 				avatar,
@@ -61,17 +62,24 @@ const PlayerAvatar = ({
 	};
 
 	return (
-		<div
-			className={classNames(style.player_avatar, {
-				[style.draggable]: draggable,
-			})}
-			style={styles}
-			onDragStart={handleDragStart}
-			onDragEnd={handleDragEnd}
-			draggable={draggable ? 'true' : 'false'}
-		>
-			<img src={avatar} alt={fullName || ''} />
-		</div>
+		<>
+			<div
+				className={classNames(style.player_avatar, {
+					[style.draggable]: draggable,
+				})}
+				style={styles}
+				onDragStart={handleDragStart}
+				onDragEnd={handleDragEnd}
+				draggable={draggable ? 'true' : 'false'}
+			>
+				<img src={avatar} alt={fullName || ''} />
+			</div>
+			{playersInField.find(player => player.id === id) && (
+				<div className={style.current_player_name}>
+					<p>{firstNameToLetter(fullName)}</p>
+				</div>
+			)}
+		</>
 	);
 };
 export default PlayerAvatar;

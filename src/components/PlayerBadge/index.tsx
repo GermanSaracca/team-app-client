@@ -1,8 +1,8 @@
-import { Player } from '@/types/Player';
+import { IPlayer } from '@/types/Player';
 import PlayerAvatar from '../PlayerAvatar';
 import style from './index.module.scss';
 
-interface Props extends Player {
+interface Props extends IPlayer {
 	avatarDraggable?: boolean;
 }
 

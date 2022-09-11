@@ -1,6 +1,6 @@
-import { Player } from '@/types/Player';
+import { IPlayer } from '@/types/Player';
 
-export const PLAYERS: Player[] = [
+export const PLAYERS: IPlayer[] = [
 	{
 		id: 1,
 		fullName: 'Milicent Novakovic',

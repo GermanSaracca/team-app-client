@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { FieldPosition, Player } from '@/types/Player';
+import { IPlayer } from '@/types/Player';
 import { FORMATION_OPTIONS } from '@/data/formationOptions';
 import { PLAYERS } from '@/data/players';
 
@@ -8,8 +8,8 @@ import { PLAYERS } from '@/data/players';
 interface FormationState {
 	formation: string;
 	teamSize: number;
-	playersInField: Player[];
-	playersInList: Player[];
+	playersInField: IPlayer[];
+	playersInList: IPlayer[];
 	isDraggingPlayer: boolean;
 }
 
@@ -38,7 +38,7 @@ export const formationSlice = createSlice({
 		setTeamSize: (state, action: PayloadAction<number>) => {
 			state.teamSize = action.payload;
 		},
-		addPlayerToField: (state, action: PayloadAction<Player>) => {
+		addPlayerToField: (state, action: PayloadAction<IPlayer>) => {
 			// Add player to field
 			state.playersInField.push(action.payload);
 			// Order the update playersInField array
@@ -46,17 +46,20 @@ export const formationSlice = createSlice({
 			// Then remove player from players in list
 			state.playersInList = state.playersInList.filter(player => player.id !== action.payload.id);
 		},
-		removePlayerFromField: (state, action: PayloadAction<Player>) => {
+		removePlayerFromField: (state, action: PayloadAction<IPlayer>) => {
 			// Remove player from field
 			state.playersInField = state.playersInField.filter(player => player.id !== action.payload.id);
 			// Add player to top of aside list
 			state.playersInList.unshift(action.payload);
 		},
-
+		removeAllPlayerFromField: state => {
+			state.playersInField = initialState.playersInField;
+			state.playersInList = initialState.playersInList;
+		},
 		/**
 		 * Receives an Array of 2 players, first is current player, second is one being dragged to where current is.
 		 */
-		replacePlayers: (state, action: PayloadAction<Player[]>) => {
+		replacePlayers: (state, action: PayloadAction<IPlayer[]>) => {
 			// Find player one add field position of player two, and viceversa
 			const playerOne = state.playersInField.find(player => player.id === action.payload[0]?.id);
 			const playerTwo = state.playersInField.find(player => player.id === action.payload[1].id);
@@ -73,7 +76,7 @@ export const formationSlice = createSlice({
 		 */
 		changePlayerFieldPosition: (
 			state,
-			action: PayloadAction<{ player: Player; newFieldPosition: FieldPosition }>
+			action: PayloadAction<{ player: IPlayer; newFieldPosition: IPlayer['fieldPosition'] }>
 		) => {
 			// Find player to change position
 			const playerToEditFieldPosition = state.playersInField.find(
@@ -96,6 +99,7 @@ export const {
 	setTeamSize,
 	addPlayerToField,
 	removePlayerFromField,
+	removeAllPlayerFromField,
 	replacePlayers,
 	changePlayerFieldPosition,
 	setIsDraggingPlayer,
