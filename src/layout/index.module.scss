@@ -3,33 +3,36 @@
 @use '../styles/variables';
 
 .layout_wrapper {
-	display: grid;
-	grid-template-columns: auto repeat(4, 1fr);
-	grid-template-rows: variables.$header-height repeat(4, 1fr);
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
+	display: flex;
+	flex-direction: column;
 	min-height: 100vh;
-	max-height: 100vh;
-
-	padding: 0.25rem;
 	background-color: colors.$primary;
 
-	@media (min-width: 1200px) {
-		flex-direction: row;
-		gap: 0.35rem;
-		padding: 0.35rem;
-	}
-
 	.main_wrapper {
-		grid-area: 2 / 2 / 6 / 6;
+		flex: 1;
 		background-color: grey;
 		border-radius: 6px;
 		background-color: colors.$black;
 		@include mixins.shadow-gradient();
 		padding: 1.5rem;
-		max-height: calc(100vh - (0.25rem * 2));
-		overflow-y: auto;
-		overflow-x: hidden;
-		@include mixins.custom-scrollbar(6px, transparent, rgba(255, 255, 255, 0.25));
+	}
+
+	@include mixins.media(desktop-m) {
+		display: grid;
+		grid-template-columns: auto repeat(4, 1fr);
+		grid-template-rows: variables.$header-height repeat(4, 1fr);
+		gap: 0.35rem;
+		padding: 0.35rem;
+		max-height: 100vh;
+
+		.main_wrapper {
+			grid-area: 2 / 2 / 6 / 6;
+
+			padding: 1.5rem;
+			max-height: calc(100vh - (0.25rem * 2));
+			overflow-y: auto;
+			overflow-x: hidden;
+			@include mixins.custom-scrollbar(6px, transparent, rgba(255, 255, 255, 0.25));
+		}
 	}
 }

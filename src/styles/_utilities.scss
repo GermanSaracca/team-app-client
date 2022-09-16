@@ -31,6 +31,13 @@ For using utilities. In the className declaration.This are globals.
 		margin-bottom: calc(#{$i} * 0.25rem);
 	}
 }
+.ml-auto {
+	margin-left: auto;
+}
+.mr-auto {
+	margin-right: auto;
+}
+/* End Margins */
 
 /* Paddings */
 @for $i from 1 to 21 {

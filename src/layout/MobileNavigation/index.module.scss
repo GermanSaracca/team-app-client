@@ -1,0 +1,9 @@
+@use '../../styles/variables';
+
+.mobile_navigation {
+	position: fixed;
+	inset: 0;
+	z-index: variables.$mobile-menu;
+	// max-height: 100vh;
+	background-color: blue;
+}

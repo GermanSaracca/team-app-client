@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { formationSlice } from './slices/formation';
+import { layoutSlice } from './slices/layout';
 import { playersSlice } from './slices/players';
 import { soundSlice } from './slices/sound';
 
@@ -8,6 +9,7 @@ export const store = configureStore({
 		formation: formationSlice.reducer,
 		players: playersSlice.reducer,
 		sound: soundSlice.reducer,
+		layout: layoutSlice.reducer,
 	},
 });
 
