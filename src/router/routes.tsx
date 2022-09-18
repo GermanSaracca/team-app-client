@@ -4,6 +4,7 @@ import { RiTeamLine } from 'react-icons/ri';
 import { AiOutlineHome } from 'react-icons/ai';
 import { GiPlayerPrevious } from 'react-icons/gi';
 import { RouteObject } from 'react-router-dom';
+import DesktopOnlyPage from '@/components/DesktopOnlyPage';
 
 const HomePage = lazy(() => import('../pages/Home'));
 const PlayersPage = lazy(() => import('../pages/Players'));
@@ -28,7 +29,11 @@ const routes: RouterPropsObject[] = [
 	},
 	{
 		path: '/formations',
-		element: <FormationsPage />,
+		element: (
+			<DesktopOnlyPage>
+				<FormationsPage />
+			</DesktopOnlyPage>
+		),
 		name: 'Formacion',
 		icon: <GiPlayerPrevious size='1em' />,
 		aside: true,

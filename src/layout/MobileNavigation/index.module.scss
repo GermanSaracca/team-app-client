@@ -1,0 +1,56 @@
+@use '../../styles/variables';
+@use '../../styles/colors';
+@use '../../styles/mixins';
+
+.mobile_navigation {
+	position: fixed;
+	inset: 0;
+	z-index: variables.$mobile-menu-z-index;
+	@include mixins.shadow-gradient();
+
+	ul {
+		margin: 0;
+		padding: 0 1.5rem;
+		list-style: none;
+
+		li {
+			&:not(:last-child) {
+				margin-bottom: 1rem;
+			}
+			.active_nav_link,
+			.nav_link {
+				display: flex;
+				align-items: center;
+				color: colors.$white;
+				padding: 1rem;
+				font-size: 20px;
+				font-weight: 600;
+				text-decoration: none;
+
+				.link_icon {
+					margin-right: 1rem;
+				}
+			}
+			.active_nav_link {
+				color: colors.$primary;
+			}
+		}
+	}
+
+	.close_btn {
+		display: flex;
+		justify-content: flex-end;
+		padding: 1.5rem;
+	}
+
+	@include mixins.media(tablet) {
+		ul {
+			padding: 2rem 3rem;
+		}
+		.close_btn {
+			display: flex;
+			justify-content: flex-end;
+			padding: 3rem;
+		}
+	}
+}

@@ -1,0 +1,10 @@
+@use '../../../styles/colors';
+
+.header_title {
+	color: colors.$white;
+	-webkit-text-stroke: 1px colors.$primary;
+	font-size: 2rem;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin: 0;
+}

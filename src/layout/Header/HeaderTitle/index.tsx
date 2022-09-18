@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import routes from '@/router/routes';
+import style from './index.module.scss';
 
 const HeaderTitle = () => {
 	const { pathname } = useLocation();
@@ -12,6 +13,6 @@ const HeaderTitle = () => {
 		setHeaderTitle(title ?? '');
 	}, [pathname]);
 
-	return <h3>{headerTitle}</h3>;
+	return <h3 className={style.header_title}>{headerTitle}</h3>;
 };
 export default HeaderTitle;

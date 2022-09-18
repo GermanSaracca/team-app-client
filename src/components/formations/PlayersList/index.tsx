@@ -28,7 +28,7 @@ const PlayersList = () => {
 		<div className={style.players_list_container} onDrop={handleDrop} onDragOver={enableDropping}>
 			<div className={style.total_players_in_list}>
 				<small>Jugadores disponibles: {playersInList.length}</small>
-				<button onClick={() => dispatch(resetFormation())} title='Reset formation'>
+				<button onClick={() => dispatch(resetFormation())}>
 					<GrPowerReset />
 				</button>
 			</div>
