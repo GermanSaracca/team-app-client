@@ -12,8 +12,9 @@ export const AsideItem = ({ path, name, icon, shrinked }: Props) => {
 		<li className={`${style.aside_item} ${shrinked ? style.shrinked : ''}`}>
 			<NavLink
 				to={path}
-				className={({ isActive }) => (isActive ? style.active_nav_link : style.nav_link)}>
-				<span className={style.icon_wrapper} data-tooltip={name}>
+				className={({ isActive }) => (isActive ? style.active_nav_link : style.nav_link)}
+			>
+				<span className={style.link_icon} data-tooltip={name}>
 					{icon}
 				</span>
 				{!shrinked && <span className={style.link_text}>{name}</span>}

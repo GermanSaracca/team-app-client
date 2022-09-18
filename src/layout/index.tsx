@@ -12,7 +12,9 @@ interface Props {
 const Layout = ({ children }: Props) => {
 	return (
 		<div className={style.layout_wrapper}>
+			{/* renders exact and above 1200px */}
 			<AsideNavigation />
+			{/* renders only below 1200px */}
 			<MobileNavigation />
 			<Header />
 			<main className={style.main_wrapper}>{children}</main>

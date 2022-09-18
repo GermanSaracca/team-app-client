@@ -1,15 +1,27 @@
 @use '../../styles/colors';
 @use '../../styles/mixins';
+@use '../../styles/variables';
 
 .main_header {
 	display: flex;
 	align-items: center;
 	background-color: colors.$black;
 	border-radius: 6px;
+	padding: 0.5rem 1rem;
 	@include mixins.shadow-gradient();
-	padding: 0.5rem 2rem;
 
 	@include mixins.media(desktop-m) {
 		grid-area: 1 / 2 / 2 / 6;
+		padding: 0.5rem 2rem;
+	}
+
+	.sound_toggle_wrapper {
+		margin-left: auto;
+		margin-right: 0.5rem;
+	}
+	@include mixins.media(desktop-m) {
+		.sound_toggle_wrapper {
+			margin-right: 0;
+		}
 	}
 }

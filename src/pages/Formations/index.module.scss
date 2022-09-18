@@ -17,6 +17,8 @@
 
 	.usage_info {
 		// border: solid 1px red;
+		@include mixins.media(desktop-m) {
+		}
 	}
 	.options {
 		display: flex;

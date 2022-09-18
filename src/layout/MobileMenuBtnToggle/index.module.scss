@@ -1,0 +1,12 @@
+@use '../../styles/colors';
+
+.mobile_menu_btn_toggle {
+	background-color: transparent;
+	border: 0;
+	color: colors.$white;
+	padding: 0;
+
+	svg {
+		color: currentColor;
+	}
+}

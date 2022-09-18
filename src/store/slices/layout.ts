@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import type { PayloadAction } from '@reduxjs/toolkit';
-import { searchLocalStorage, setLocalStorage } from '@/utils';
 
 // Define a type for the slice state
 interface ILayoutState {
@@ -9,7 +8,7 @@ interface ILayoutState {
 
 // Define the initial state using that type
 const initialState: ILayoutState = {
-	mobileMenuOpen: searchLocalStorage('mobileMenuOpen', false),
+	mobileMenuOpen: false,
 };
 
 export const layoutSlice = createSlice({
@@ -19,7 +18,6 @@ export const layoutSlice = createSlice({
 	reducers: {
 		toggleMenu: state => {
 			state.mobileMenuOpen = !state.mobileMenuOpen;
-			setLocalStorage('mobileMenuOpen', state.mobileMenuOpen);
 		},
 	},
 });
