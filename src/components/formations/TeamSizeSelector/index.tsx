@@ -1,5 +1,5 @@
 import CustomSelect from '@/components/CustomSelect';
-import { FORMATION_SIZES } from '@/data/formationSizes';
+import { FORMATION_SIZES } from '@/data';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { removeAllPlayerFromField, setTeamSize } from '@/store/slices/formation';
 import { TeamSizeOptionType } from '@/types/TeamSizeOptionType';

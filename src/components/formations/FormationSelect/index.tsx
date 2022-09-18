@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { FORMATION_OPTIONS } from '@/data/formationOptions';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { setFormation } from '@/store/slices/formation';
 import { FormationOptionType } from '@/types/FormationOptionType';
 import CustomSelect from '../../CustomSelect';
+import { FORMATION_OPTIONS } from '@/data';
 
 const FormationSelect = ({ minWidth = 'unset' }: { minWidth?: number | string }) => {
 	const dispatch = useAppDispatch();
