@@ -10,6 +10,7 @@ interface FormationState {
 	playersInField: IPlayer[];
 	playersInList: IPlayer[];
 	isDraggingPlayer: boolean;
+	isDraggingPlayerFromField: boolean;
 }
 
 // Define the initial state using that type
@@ -19,6 +20,7 @@ const initialState: FormationState = {
 	playersInField: [],
 	playersInList: PLAYERS,
 	isDraggingPlayer: false,
+	isDraggingPlayerFromField: false,
 };
 /**
  *  Immer is a library that simplifies the process of writing immutable update logic.
@@ -89,6 +91,9 @@ export const formationSlice = createSlice({
 		setIsDraggingPlayer: (state, action: PayloadAction<boolean>) => {
 			state.isDraggingPlayer = action.payload;
 		},
+		setIsDraggingPlayerFromField: (state, action: PayloadAction<boolean>) => {
+			state.isDraggingPlayerFromField = action.payload;
+		},
 		resetFormation: () => initialState,
 	},
 });
@@ -102,6 +107,7 @@ export const {
 	replacePlayers,
 	changePlayerFieldPosition,
 	setIsDraggingPlayer,
+	setIsDraggingPlayerFromField,
 	resetFormation,
 } = formationSlice.actions;
 

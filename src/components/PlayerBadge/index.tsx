@@ -9,8 +9,10 @@ interface Props extends IPlayer {
 const PlayerBadge = ({ avatarDraggable = true, ...props }: Props) => {
 	return (
 		<div className={style.player_badge}>
-			<PlayerAvatar xy={50} draggable={avatarDraggable} {...props} />
-			<div className={style.player_info}>
+			<div className={style.avatar}>
+				<PlayerAvatar xy={50} draggable={avatarDraggable} {...props} />
+			</div>
+			<div className={style.info}>
 				<p>{props.fullName}</p>
 				<small>{props.position}</small>
 			</div>

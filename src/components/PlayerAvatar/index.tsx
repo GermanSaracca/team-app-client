@@ -2,7 +2,7 @@ import React from 'react';
 import { IPlayer } from '@/types/Player';
 import style from './index.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { setIsDraggingPlayer } from '@/store/slices/formation';
+import { setIsDraggingPlayer, setIsDraggingPlayerFromField } from '@/store/slices/formation';
 import classNames from 'classnames';
 import { firstNameToLetter } from '@/utils';
 // import usePreventDefaultDragOver from '@/hooks/usePreventDefaultDragOver';
@@ -49,8 +49,10 @@ const PlayerAvatar = ({
 			if (isPlayerInField) {
 				// Si ya esta en campo cuando se empieza a draguear, entonces o estamos moviendo el jugador hacia afuera de la cancha o lo estamos moviendo a otra posicion dentro de la cancha
 				e.dataTransfer.setData('player-from-field', JSON.stringify(playerData));
+				dispatch(setIsDraggingPlayerFromField(true));
 			} else {
 				e.dataTransfer.setData('player-from-list', JSON.stringify(playerData));
+				dispatch(setIsDraggingPlayerFromField(false));
 			}
 		}
 	};
@@ -58,6 +60,7 @@ const PlayerAvatar = ({
 	const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
 		if (draggable) {
 			dispatch(setIsDraggingPlayer(false));
+			dispatch(setIsDraggingPlayerFromField(false));
 		}
 	};
 

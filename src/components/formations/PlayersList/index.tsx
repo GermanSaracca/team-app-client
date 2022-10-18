@@ -5,11 +5,15 @@ import style from './index.module.scss';
 import { removePlayerFromField, resetFormation } from '@/store/slices/formation';
 import { enableDropping } from '@/utils';
 import { GrPowerReset } from 'react-icons/gr';
+import { MdEventSeat } from 'react-icons/md';
 import useSound from 'use-sound';
 import pinbalSound from '../../../assets/audio/pinbal.wav';
+import classNames from 'classnames';
 
 const PlayersList = () => {
-	const { playersInList } = useAppSelector(state => state.formation);
+	const { playersInList, isDraggingPlayer, isDraggingPlayerFromField } = useAppSelector(
+		state => state.formation
+	);
 	const { withSound } = useAppSelector(state => state.sound);
 	const dispatch = useAppDispatch();
 	const [play] = useSound(pinbalSound);
@@ -25,13 +29,20 @@ const PlayersList = () => {
 	};
 
 	return (
-		<div className={style.players_list_container} onDrop={handleDrop} onDragOver={enableDropping}>
+		<div
+			className={classNames(style.players_list_container, {
+				[style.drop_mode]: isDraggingPlayer && isDraggingPlayerFromField,
+			})}
+			onDrop={handleDrop}
+			onDragOver={enableDropping}
+		>
 			<div className={style.total_players_in_list}>
 				<small>Jugadores disponibles: {playersInList.length}</small>
 				<button onClick={() => dispatch(resetFormation())}>
 					<GrPowerReset />
 				</button>
 			</div>
+
 			<ul className={style.players_list}>
 				{playersInList.map(({ fullName, position, avatar, id }) => {
 					return (
@@ -41,6 +52,15 @@ const PlayersList = () => {
 					);
 				})}
 			</ul>
+			{/* Drop zone Hint */}
+			<div
+				className={classNames(style.drop_hint_zone, {
+					[style.show]: isDraggingPlayer && isDraggingPlayerFromField,
+				})}
+			>
+				<MdEventSeat size={100} className={style.hint_icon} />
+			</div>
+
 			<div className={style.bottom_gradient} />
 		</div>
 	);
