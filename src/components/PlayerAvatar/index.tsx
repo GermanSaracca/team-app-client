@@ -77,7 +77,7 @@ const PlayerAvatar = ({
 			>
 				<img src={avatar} alt={fullName || ''} />
 			</div>
-			{playersInField.find(player => player.id === id) && (
+			{draggable && playersInField.find(player => player.id === id) && (
 				<div className={style.current_player_name}>
 					<p>{firstNameToLetter(fullName)}</p>
 				</div>

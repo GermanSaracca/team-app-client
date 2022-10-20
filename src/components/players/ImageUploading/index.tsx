@@ -5,7 +5,11 @@ import { FiCheck } from 'react-icons/fi';
 import { MdClear } from 'react-icons/md';
 import style from './index.module.scss';
 
-const ImageUploading = () => {
+interface Props {
+	onAvatarChange: (avatar: string | null) => void;
+}
+
+const ImageUploading = ({ onAvatarChange }: Props) => {
 	const [selectedFile, setSelectedFile] = useState<FileList | null>(null); // The file selected
 	const [fileObjUrl, setFileObjUrl] = useState<string | null>(null); // The Object URL created from the file selected
 	const [userImageUrl, setUserImageUrl] = useState<string | null>(null); // The Object URL created from the crop
@@ -16,6 +20,7 @@ const ImageUploading = () => {
 		setFileObjUrl(null);
 		setUserImageUrl(null);
 		setShowPreview(false);
+		onAvatarChange(null);
 	};
 
 	const handleCancelCrop = () => {
@@ -24,6 +29,7 @@ const ImageUploading = () => {
 	};
 	const handleSaveCroppedImage = () => {
 		setShowPreview(true);
+		onAvatarChange(userImageUrl);
 	};
 
 	useEffect(() => {
@@ -38,7 +44,9 @@ const ImageUploading = () => {
 		}
 	}, [selectedFile]);
 
-	const handleUrlCreated = useCallback((url: string) => setUserImageUrl(url), []);
+	const handleUrlCreated = useCallback((url: string) => {
+		setUserImageUrl(url);
+	}, []);
 
 	return (
 		<div className='mt-2'>

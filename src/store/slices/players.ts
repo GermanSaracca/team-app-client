@@ -6,15 +6,11 @@ import { PLAYERS } from '@/data';
 // Define a type for the slice state
 interface PlayersState {
 	players: IPlayer[];
-	selectedFile: string | null;
-	userImageBlob: string | null;
 }
 
 // Define the initial state using that type
 const initialState: PlayersState = {
 	players: PLAYERS,
-	selectedFile: null,
-	userImageBlob: null,
 };
 
 export const playersSlice = createSlice({
@@ -31,16 +27,9 @@ export const playersSlice = createSlice({
 		deletePlayer: (state, action: PayloadAction<IPlayer['id']>) => {
 			console.log(action.payload);
 		},
-		setSelectedFile: (state, action: PayloadAction<string | null>) => {
-			state.selectedFile = action.payload;
-		},
-		setUserImageBlob: (state, action: PayloadAction<string | null>) => {
-			state.userImageBlob = action.payload;
-		},
 	},
 });
 
-export const { createPlayer, editPlayer, deletePlayer, setSelectedFile, setUserImageBlob } =
-	playersSlice.actions;
+export const { createPlayer, editPlayer, deletePlayer } = playersSlice.actions;
 
 export default playersSlice.reducer;

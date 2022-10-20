@@ -8,13 +8,11 @@
 
 	.form_container {
 		flex: 0.25;
+		height: fit-content;
 		border-radius: 6px;
-		padding: 1rem;
+		padding: 1.5rem;
 		transition: all 300ms ease-in-out;
-
-		&:focus-within {
-			@include mixins.shadow-gradient();
-		}
+		@include mixins.shadow-gradient();
 
 		h3 {
 			margin: 0;
@@ -54,6 +52,11 @@
 				}
 				label {
 					margin-bottom: 0.25rem;
+				}
+				.error_span {
+					margin-top: 6px;
+					font-size: 14px;
+					color: colors.$error;
 				}
 			}
 			.save_player_btn {
