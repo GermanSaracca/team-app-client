@@ -21,7 +21,6 @@ const CustomModal = ({
 	return (
 		<ReactModal
 			isOpen={isOpen} /* Boolean describing if the modal should be shown or not. */
-			onRequest
 			contentLabel={
 				contentLabel
 			} /* String indicating how the content container should be announced to screenreaders */
