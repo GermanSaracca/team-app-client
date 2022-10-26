@@ -53,6 +53,7 @@
 	margin: 0;
 	padding: 0.5rem;
 	background-color: black;
+	position: relative;
 
 	li:not(:last-child) {
 		margin-bottom: 0.5rem;
@@ -65,10 +66,9 @@
 .drop_hint_zone {
 	display: grid;
 	place-items: center;
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
 	position: absolute;
 	top: 0;
+	left: 0;
 	height: 100%;
 	width: 100%;
 	z-index: 3;

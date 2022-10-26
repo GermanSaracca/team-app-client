@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import PlayerBadge from '../../PlayerBadge';
-import style from './index.module.scss';
+import useSound from 'use-sound';
 import { removePlayerFromField, resetFormation } from '@/store/slices/formation';
+import PlayerBadge from '../../PlayerBadge';
 import { enableDropping } from '@/utils';
 import { GrPowerReset } from 'react-icons/gr';
 import { MdEventSeat } from 'react-icons/md';
-import useSound from 'use-sound';
 import pinbalSound from '../../../assets/audio/pinbal.wav';
 import classNames from 'classnames';
+import style from './index.module.scss';
 
 const PlayersList = () => {
 	const { playersInList, isDraggingPlayer, isDraggingPlayerFromField } = useAppSelector(
@@ -17,6 +17,7 @@ const PlayersList = () => {
 	const { withSound } = useAppSelector(state => state.sound);
 	const dispatch = useAppDispatch();
 	const [play] = useSound(pinbalSound);
+	const playersListRef = useRef<HTMLDivElement>(null);
 
 	// When
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -35,6 +36,7 @@ const PlayersList = () => {
 			})}
 			onDrop={handleDrop}
 			onDragOver={enableDropping}
+			ref={playersListRef}
 		>
 			<div className={style.total_players_in_list}>
 				<small>Jugadores disponibles: {playersInList.length}</small>
@@ -57,10 +59,12 @@ const PlayersList = () => {
 				className={classNames(style.drop_hint_zone, {
 					[style.show]: isDraggingPlayer && isDraggingPlayerFromField,
 				})}
+				style={{
+					top: `${playersListRef?.current?.scrollTop}px`,
+				}}
 			>
-				<MdEventSeat size={100} className={style.hint_icon} />
+				<MdEventSeat size={100} />
 			</div>
-
 			<div className={style.bottom_gradient} />
 		</div>
 	);

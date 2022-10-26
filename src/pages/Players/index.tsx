@@ -114,6 +114,10 @@ const Players = () => {
 						id={p.id}
 						key={p.id}
 						avatarDraggable={false}
+						actions={{
+							delete: true,
+							edit: true,
+						}}
 					/>
 				))}
 			</div>

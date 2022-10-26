@@ -97,5 +97,8 @@
 		max-height: 100%;
 		overflow-y: scroll;
 		@include mixins.custom-scrollbar(6px, transparent, rgba(255, 255, 255, 0.25));
+		// @include mixins.shadow-gradient();
+		// padding: 12px;
+		// border-radius: 6px;
 	}
 }

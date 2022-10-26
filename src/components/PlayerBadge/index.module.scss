@@ -18,4 +18,22 @@
 			font-weight: 700;
 		}
 	}
+	.actions_container {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		// padding: 0 0.5rem;
+		margin-left: auto;
+		// border: solid 1px red;
+
+		button {
+			color: colors.$primary;
+			background-color: transparent;
+			border: 0;
+			transition: 300ms ease-in-out;
+			cursor: pointer;
+
+			@include mixins.circle-background();
+		}
+	}
 }
