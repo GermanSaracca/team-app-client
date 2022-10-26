@@ -1,0 +1,112 @@
+@use '../../../styles/colors';
+@use '../../../styles/mixins';
+
+.player_form {
+	display: flex;
+	flex-direction: column;
+
+	.form_group {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		&:not(:last-child) {
+			margin-bottom: 1rem;
+		}
+		input {
+			width: 100%;
+			color: colors.$black;
+		}
+		.name_input {
+			height: 30.5px;
+			border-radius: 4px;
+			padding-left: 0.5rem;
+			font-weight: 500;
+			box-shadow: 0 0 0 2px colors.$spanish-green;
+			border: 0;
+			outline: 0;
+
+			&:focus {
+				box-shadow: 0 0 0 2px colors.$primary;
+			}
+			&::placeholder {
+				color: lighten($color: colors.$gray, $amount: 20);
+				font-weight: 400;
+			}
+		}
+		label {
+			margin-bottom: 0.45rem;
+		}
+		.error_span {
+			margin-top: 6px;
+			font-size: 14px;
+			color: colors.$error;
+		}
+		.hint_span {
+			@extend .error_span;
+			color: colors.$primary;
+		}
+	}
+
+	.old_image_preview_container {
+		width: fit-content;
+		position: relative;
+		margin-top: 0.25rem;
+
+		.image_preview {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			object-fit: cover;
+			object-position: center;
+			box-shadow: 0 0 10px 2px #000;
+			border: solid 3px colors.$primary;
+		}
+		button {
+			display: grid;
+			place-items: center;
+			color: colors.$white;
+			background-color: colors.$error;
+			border-radius: 50%;
+			border: solid 2px colors.$white;
+			padding: 0.15rem;
+			font-weight: 700;
+			cursor: pointer;
+			position: absolute;
+			top: 4px;
+			right: -10px;
+
+			&:hover {
+				background-color: darken($color: colors.$error, $amount: 20);
+			}
+			&:active {
+				transform: scale(0.95);
+			}
+		}
+	}
+	.save_player_btn {
+		align-self: flex-end;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: colors.$black;
+		background-color: colors.$primary;
+		border-radius: 4px;
+		border: solid 2px colors.$gray;
+		padding: 0.5rem 1rem;
+		margin-top: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+
+		&:hover {
+			background-color: darken($color: colors.$primary, $amount: 20);
+		}
+		&:active {
+			transform: scale(0.95);
+		}
+		&:disabled {
+			pointer-events: none;
+			background-color: colors.$gray;
+		}
+	}
+}

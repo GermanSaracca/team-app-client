@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { IPlayer } from '@/types/Player';
-import { PLAYERS } from '@/data/players';
+import { PLAYERS } from '@/data';
 
 // Define a type for the slice state
 interface PlayersState {

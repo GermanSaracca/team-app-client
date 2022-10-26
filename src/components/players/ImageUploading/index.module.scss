@@ -1,0 +1,88 @@
+@use '../../../styles/colors';
+@use '../../../styles/mixins';
+
+.image_cropper_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	border-radius: 6px;
+	padding: 0.5rem;
+	overflow: hidden;
+	@include mixins.shadow-gradient();
+
+	.actions {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		background-color: colors.$black;
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 0.5rem 0.5rem 0.35rem 0.35rem;
+		border-radius: 4px;
+
+		button {
+			display: grid;
+			place-items: center;
+			color: colors.$black;
+			background-color: colors.$primary;
+			border-radius: 4px;
+			border: solid 2px colors.$gray;
+			padding: 0.25rem;
+			font-weight: 600;
+			cursor: pointer;
+
+			&:hover {
+				background-color: darken($color: colors.$primary, $amount: 20);
+			}
+			&:active {
+				transform: scale(0.95);
+			}
+
+			&:first-child {
+				background-color: colors.$error;
+
+				&:hover {
+					background-color: darken($color: colors.$error, $amount: 20);
+				}
+			}
+		}
+	}
+}
+
+.image_preview_container {
+	width: fit-content;
+	position: relative;
+
+	.image_preview {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center;
+		box-shadow: 0 0 10px 2px #000;
+		border: solid 3px colors.$primary;
+	}
+	button {
+		display: grid;
+		place-items: center;
+		color: colors.$white;
+		background-color: colors.$error;
+		border-radius: 50%;
+		border: solid 2px colors.$white;
+		padding: 0.15rem;
+		font-weight: 700;
+		cursor: pointer;
+		position: absolute;
+		top: 4px;
+		right: -10px;
+
+		&:hover {
+			background-color: darken($color: colors.$error, $amount: 20);
+		}
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+}

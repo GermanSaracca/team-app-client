@@ -21,7 +21,7 @@ const MobileNavigation = () => {
 				<ul>
 					{routes.map(({ name, path, icon, aside }) => {
 						if (!aside) {
-							// If the route has not aside on true, don't render it on the aside 😂
+							// If the route has not aside property on true, don't render it on the aside 👌
 							return null;
 						}
 

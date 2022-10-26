@@ -1,0 +1,36 @@
+@use '../../styles/colors';
+@use '../../styles/mixins';
+
+/* 
+    Aca se declaran las clases que sobreescribiran ciertos estilos de los modales de SweetAlert2
+    Las clases aca declaradas estan definidas en el componente SwalCustom que toma el componente Swal de la
+    libreria y le agrega ciertos defaults. Asi tenemos un componente de SweetAlert2 con los estilos que queremos en 
+    todo el sitio.
+*/
+
+// SWAL cuando es TOAST o NO
+.swal-container-custom {
+	.swal-title-custom {
+		color: colors.$white;
+	}
+	.swal-popup-custom {
+		@include mixins.shadow-gradient();
+		border-radius: 6px;
+	}
+	.swal-button-custom {
+		color: colors.$black !important;
+	}
+}
+// SWAL cuando no es TOAST
+.swal-container-custom:not(:has(.swal2-toast)) {
+	background-color: colors.$modal-background !important;
+
+	.swal-title-custom {
+		font-size: 24px !important;
+	}
+	.swal-button-custom {
+		font-weight: 700 !important;
+		padding: 0.5em 1.5em !important;
+		margin: 0.6em !important;
+	}
+}

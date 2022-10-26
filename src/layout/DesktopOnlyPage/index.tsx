@@ -1,5 +1,5 @@
-import useWindowSize from '@/hooks/useWindowSize';
 import React from 'react';
+import useWindowSize from '@/hooks/useWindowSize';
 
 interface IProps {
 	children: React.ReactElement;

@@ -1,0 +1,62 @@
+@use '../../styles/colors';
+@use '../../styles/mixins';
+
+.ReactModal__Overlay {
+	display: grid;
+	place-items: center;
+	position: fixed !important;
+	inset: 0px !important;
+	z-index: 1 !important;
+	background-color: colors.$modal-background !important;
+
+	// &--after-open {
+	// }
+
+	// &--before-close {
+	// }
+}
+.ReactModal__Content {
+	position: static !important;
+	width: 95%;
+	min-width: 95%;
+	max-height: 90%;
+	border: 0 !important;
+	overflow: auto;
+	border-radius: 6px !important;
+	outline: none;
+	padding: 20px 32px !important;
+	@include mixins.shadow-gradient();
+	@include mixins.custom-scrollbar(6px, transparent, rgba(255, 255, 255, 0.25));
+
+	@include mixins.media(desktop-s) {
+		min-width: 45vw;
+		width: fit-content;
+		max-width: 90vw;
+		max-height: 90vh;
+	}
+
+	.modal_header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+
+		&__title {
+			color: colors.$white;
+			-webkit-text-stroke: 1px #53ff45;
+			font-weight: 500;
+			font-size: 1.8rem;
+			letter-spacing: 1px;
+			margin: 0;
+		}
+
+		&__close_button {
+			background-color: transparent;
+			border: 0;
+			color: colors.$white;
+			margin-left: auto;
+			cursor: pointer;
+			@include mixins.circle-background();
+		}
+	}
+}

@@ -1,7 +1,11 @@
 @use './colors';
 
 @mixin shadow-gradient($color: colors.$black, $shadow: true) {
-	background-image: linear-gradient(315deg, $color, change-color($color, $lightness: 18%));
+	background-image: linear-gradient(
+		315deg,
+		$color,
+		change-color($color, $lightness: 18%)
+	) !important;
 
 	@if $shadow {
 		box-shadow: inset 0 0 20px 0 darken($color: $color, $amount: 10%), 0 0 20px 0 $color;

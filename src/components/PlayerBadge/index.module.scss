@@ -10,12 +10,30 @@
 	@include mixins.shadow-gradient();
 	padding: 0.5rem;
 
-	.player_info {
+	.info {
 		color: colors.$white;
 		pointer-events: none;
+		user-select: none;
 
 		p {
 			font-weight: 700;
+		}
+	}
+	.actions_container {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		margin-left: auto;
+		min-width: fit-content;
+
+		button {
+			color: colors.$primary;
+			background-color: transparent;
+			border: 0;
+			transition: 300ms ease-in-out;
+			cursor: pointer;
+
+			@include mixins.circle-background();
 		}
 	}
 }
