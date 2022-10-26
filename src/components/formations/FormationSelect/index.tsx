@@ -49,7 +49,6 @@ const FormationSelect = ({ minWidth = 'unset' }: { minWidth?: number | string })
 				options={FORMATION_OPTIONS.filter(option => formationSize(option.value) === teamSize)}
 				defaultValue={FORMATION_OPTIONS.find(option => option.value === formation)}
 				value={value}
-				// hideSelectedOptions
 				onChange={handleChange}
 			/>
 		</div>

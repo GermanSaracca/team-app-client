@@ -8,21 +8,29 @@
     todo el sitio.
 */
 
+// SWAL cuando es TOAST o NO
 .swal-container-custom {
-	background-color: rgba(colors.$primary, 0.25) !important;
+	.swal-title-custom {
+		color: colors.$white;
+	}
+	.swal-popup-custom {
+		@include mixins.shadow-gradient();
+		border-radius: 6px;
+	}
+	.swal-button-custom {
+		color: colors.$black !important;
+	}
 }
-.swal-popup-custom {
-	@include mixins.shadow-gradient($color: lighten(colors.$black, 10%));
-}
-.swal-button-custom {
-	text-transform: uppercase !important;
-	font-weight: 600 !important;
-	color: colors.$black !important;
-	padding: 0.5em 1.5em !important;
-	margin: 0.6em !important;
-}
+// SWAL cuando no es TOAST
+.swal-container-custom:not(:has(.swal2-toast)) {
+	background-color: colors.$modal-background !important;
 
-.swal-title-custom {
-	color: colors.$white;
-	font-size: 24px !important;
+	.swal-title-custom {
+		font-size: 24px !important;
+	}
+	.swal-button-custom {
+		font-weight: 700 !important;
+		padding: 0.5em 1.5em !important;
+		margin: 0.6em !important;
+	}
 }

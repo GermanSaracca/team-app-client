@@ -2,16 +2,16 @@ import { IPlayer } from '@/types/Player';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 import PlayerAvatar from '../PlayerAvatar';
 import style from './index.module.scss';
-import colors from '../../styles/_colors.module.scss';
-import SwalCustom from '../CustomSwal';
 
 interface Actions {
-	edit?: boolean;
-	delete?: boolean;
+	edit?: () => void;
+	delete?: () => void;
 }
-interface PlayerActionsProps extends IPlayer {
+
+interface PlayerActionsProps {
 	actions: Actions;
 }
+
 interface Props extends IPlayer {
 	avatarDraggable?: boolean;
 	actions?: Actions;
@@ -27,34 +27,21 @@ const PlayerBadge = ({ avatarDraggable = true, actions, ...props }: Props) => {
 				<p>{props.fullName}</p>
 				<small>{props.position}</small>
 			</div>
-			{actions && <PlayerActions actions={actions} {...props} />}
+			{actions && <PlayerActions actions={actions} />}
 		</div>
 	);
 };
 
-const PlayerActions = ({ actions, ...rest }: PlayerActionsProps) => {
-	const handleDeletePlayer = () => {
-		SwalCustom.fire({
-			title: `Seguro que desea eliminar a ${rest.fullName}?`,
-			icon: 'warning',
-		}).then(result => console.log(result));
-	};
-
-	const handleEditPlayer = () => {
-		SwalCustom.fire({
-			title: `Eitando a ${rest.fullName}`,
-		}).then(result => console.log(result));
-	};
-
+const PlayerActions = ({ actions }: PlayerActionsProps) => {
 	return (
 		<div className={style.actions_container}>
 			{actions.edit && (
-				<button onClick={handleEditPlayer} type='button'>
+				<button onClick={actions.edit} type='button'>
 					<MdModeEdit size={20} />
 				</button>
 			)}
 			{actions.delete && (
-				<button onClick={handleDeletePlayer} type='button'>
+				<button onClick={actions.delete} type='button'>
 					<MdDelete size={20} />
 				</button>
 			)}

@@ -1,127 +1,80 @@
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useState } from 'react';
 import { useAppSelector } from '@/hooks/reduxHooks';
-import CustomSelect from '@/components/CustomSelect';
 import PlayerBadge from '@/components/PlayerBadge';
-import ImageUploading from '@/components/players/ImageUploading';
-import { POSITION_OPTIONS } from '@/data';
-import { FiSave } from 'react-icons/fi';
+import PlayerForm from '@/components/players/PlayerForm';
+import SwalCustom from '@/components/CustomSwal';
 import style from './index.module.scss';
-import { PositionOptionType } from '@/types';
-
-type FormInputs = {
-	name: string;
-	position: PositionOptionType;
-	userAvatar: string | null;
-};
+import { IPlayer } from '@/types';
+import CustomModal from '@/components/CustomModal';
 
 const Players = () => {
 	const { players } = useAppSelector(state => state.players);
 
-	const {
-		register,
-		handleSubmit,
-		setValue,
-		reset,
-		control,
-		formState: { errors },
-	} = useForm<FormInputs>();
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [playerToEdit, setPlayerToEdit] = useState<IPlayer | null>(null);
 
-	const onSubmit: SubmitHandler<FormInputs> = data => {
-		console.log(data);
-		alert(JSON.stringify(data, null, 2));
-		reset();
+	// TODO: Agregar jugador (Firebase)
+	// TODO: Eliminar jugador (Firebase)
+	// TODO: Editar jugador (Firebase)
+	// TODO: Eliminar object urls guardados en memoria luego de su uso
+
+	// DELETE PLAYER
+	const onDeletePlayer = (player: IPlayer) => {
+		SwalCustom.fire({
+			title: `Seguro que desea eliminar a ${player.fullName}?`,
+			icon: 'warning',
+		}).then(result => console.log(result));
 	};
 
-	const handleAvatarChange = (value: string | null) => {
-		setValue('userAvatar', value, { shouldValidate: true });
+	// EDIT PLAYER
+	const onEditPlayer = (player: IPlayer) => {
+		setIsModalOpen(true);
+		setPlayerToEdit(player);
 	};
-
-	// TODO: Eliminar imagen de avatar programaticamente desde padre
-	// TODO: Resetear campos luego de guardar y cargar satisfactoriamente un jugador
-	// TODO: Editar jugador
-	// TODO: Eliminar jugador
 
 	return (
 		<div className={style.players_layout}>
 			{/* Add Player Form */}
 			<div className={style.form_container}>
 				<h3>Agrega un nuevo jugador 👇</h3>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					{/* Name */}
-					<div className={style.form_group}>
-						<label htmlFor='name'>Nombre</label>
-						<input
-							className={style.name_input}
-							type='text'
-							id='name'
-							placeholder='Ej: Lionel Messi'
-							autoComplete='off'
-							{...register('name', { required: true })}
-						/>
-						{errors.name && (
-							<span className={style.error_span}>Por favor ingrese el nombre del jugador</span>
-						)}
-					</div>
-					{/* Position */}
-					<div className={style.form_group}>
-						<label htmlFor='position'>Posición</label>
-						<Controller
-							render={({ field }) => (
-								<CustomSelect
-									onChange={selectedOption => {
-										if (selectedOption) {
-											field.onChange(selectedOption);
-										}
-									}}
-									options={POSITION_OPTIONS}
-								/>
-							)}
-							rules={{ required: true }}
-							name='position'
-							control={control}
-						/>
-						{errors.position && (
-							<span className={style.error_span}>Por favor seleccione el puesto del jugador</span>
-						)}
-					</div>
-
-					{/* Image */}
-
-					<div className={style.form_group}>
-						<label>Imagen</label>
-						<ImageUploading onAvatarChange={handleAvatarChange} />
-						<input type='hidden' id='userAvatar' {...register('userAvatar', { required: true })} />
-						{errors.userAvatar && (
-							<span className={style.error_span}>Por favor seleccione una imagen de perfil</span>
-						)}
-					</div>
-
-					<button className={style.save_player_btn} type='submit'>
-						<FiSave size={20} />
-						Agregar jugador
-					</button>
-				</form>
+				<PlayerForm mode='create' />
 			</div>
 			{/* End Add Player Form */}
 
 			{/* Players Grid */}
 			<div className={style.players_grid}>
-				{players.map(p => (
+				{players.map(player => (
 					<PlayerBadge
-						fullName={p.fullName}
-						position={p.position}
-						avatar={p.avatar}
-						id={p.id}
-						key={p.id}
+						fullName={player.fullName}
+						position={player.position}
+						avatar={player.avatar}
+						id={player.id}
+						key={player.id}
 						avatarDraggable={false}
 						actions={{
-							delete: true,
-							edit: true,
+							delete: () => onDeletePlayer(player),
+							edit: () => {
+								onEditPlayer(player);
+							},
 						}}
 					/>
 				))}
 			</div>
 			{/* End Players Grid */}
+			<CustomModal
+				isOpen={isModalOpen}
+				onRequestClose={() => setIsModalOpen(false)}
+				headerTitle='Editar Jugador'
+			>
+				{playerToEdit && (
+					<PlayerForm
+						mode='edit'
+						fullName={playerToEdit.fullName}
+						position={playerToEdit.position}
+						avatar={playerToEdit.avatar}
+					/>
+				)}
+			</CustomModal>
 		</div>
 	);
 };

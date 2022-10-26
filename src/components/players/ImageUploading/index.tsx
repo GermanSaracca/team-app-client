@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, forwardRef, useImperativeHandle } from 'react';
 import ImageCropper from '@/components/ImageCropper';
 import DropFileZone from '../DropFileZone';
 import { FiCheck } from 'react-icons/fi';
@@ -9,7 +9,8 @@ interface Props {
 	onAvatarChange: (avatar: string | null) => void;
 }
 
-const ImageUploading = ({ onAvatarChange }: Props) => {
+// eslint-disable-next-line react/display-name
+const ImageUploading = forwardRef(({ onAvatarChange }: Props, ref) => {
 	const [selectedFile, setSelectedFile] = useState<FileList | null>(null); // The file selected
 	const [fileObjUrl, setFileObjUrl] = useState<string | null>(null); // The Object URL created from the file selected
 	const [userImageUrl, setUserImageUrl] = useState<string | null>(null); // The Object URL created from the crop
@@ -48,6 +49,11 @@ const ImageUploading = ({ onAvatarChange }: Props) => {
 		setUserImageUrl(url);
 	}, []);
 
+	useImperativeHandle(ref, () => {
+		return {
+			handleReset,
+		};
+	});
 	return (
 		<div className='mt-2'>
 			{/* Drop file zone */}
@@ -80,5 +86,5 @@ const ImageUploading = ({ onAvatarChange }: Props) => {
 			)}
 		</div>
 	);
-};
+});
 export default ImageUploading;

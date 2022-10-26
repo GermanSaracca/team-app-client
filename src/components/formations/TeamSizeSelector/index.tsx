@@ -1,4 +1,5 @@
 import CustomSelect from '@/components/CustomSelect';
+import SwalCustom from '@/components/CustomSwal';
 import { FORMATION_SIZES } from '@/data';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { removeAllPlayerFromField, setTeamSize } from '@/store/slices/formation';
@@ -7,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 const TeamSizeSelector = () => {
 	const dispatch = useAppDispatch();
-	const { teamSize } = useAppSelector(state => state.formation);
+	const { teamSize, playersInField } = useAppSelector(state => state.formation);
 	const [value, setValue] = useState(FORMATION_SIZES.find(size => size.value === teamSize));
 
 	useEffect(() => {
@@ -16,8 +17,23 @@ const TeamSizeSelector = () => {
 
 	// Add team size selected to the store
 	const handleChange = (selected: TeamSizeOptionType | unknown) => {
-		dispatch(setTeamSize((selected as TeamSizeOptionType).value));
-		dispatch(removeAllPlayerFromField());
+		if (playersInField.length > 0) {
+			SwalCustom.fire({
+				title: `Si cambia la cantidad de jugadores ahora quitara los jugadores ya ubicados de la cancha.`,
+				confirmButtonText: 'Si, continuar.',
+				icon: 'warning',
+				toast: true,
+				position: 'top-right',
+			}).then(result => {
+				if (result.isConfirmed) {
+					dispatch(setTeamSize((selected as TeamSizeOptionType).value));
+					dispatch(removeAllPlayerFromField());
+				}
+			});
+		} else {
+			dispatch(setTeamSize((selected as TeamSizeOptionType).value));
+			dispatch(removeAllPlayerFromField());
+		}
 	};
 	return (
 		<div>

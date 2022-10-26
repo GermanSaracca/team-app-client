@@ -7,7 +7,7 @@
 	position: fixed !important;
 	inset: 0px !important;
 	z-index: 1 !important;
-	background-color: rgba(darken(colors.$primary, 45), 0.8) !important;
+	background-color: colors.$modal-background !important;
 
 	// &--after-open {
 	// }

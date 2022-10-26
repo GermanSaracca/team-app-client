@@ -13,6 +13,7 @@
 	.info {
 		color: colors.$white;
 		pointer-events: none;
+		user-select: none;
 
 		p {
 			font-weight: 700;
@@ -22,9 +23,8 @@
 		display: flex;
 		align-items: center;
 		gap: 0.25rem;
-		// padding: 0 0.5rem;
 		margin-left: auto;
-		// border: solid 1px red;
+		min-width: fit-content;
 
 		button {
 			color: colors.$primary;

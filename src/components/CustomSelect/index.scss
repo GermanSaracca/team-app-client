@@ -19,6 +19,10 @@
 		}
 	}
 
+	&__input {
+		color: colors.$black !important;
+	}
+
 	&__indicator-separator {
 		// display: none !important;
 	}
