@@ -26,8 +26,6 @@ const SwalCustom = Swal.mixin({
 	showDenyButton: true,
 	denyButtonText: 'Cancelar',
 	denyButtonColor: Error,
-	allowOutsideClick: true,
-	allowEscapeKey: true,
 	toast: false,
 	customClass: {
 		popup: 'swal-popup-custom',
@@ -37,6 +35,7 @@ const SwalCustom = Swal.mixin({
 		denyButton: 'swal-button-custom',
 		icon: 'swal-icon-custom',
 		container: 'swal-container-custom',
+		validationMessage: 'swal-validation-msg-custom',
 	},
 });
 

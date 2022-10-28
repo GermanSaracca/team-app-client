@@ -49,7 +49,13 @@ const PlayersList = () => {
 				{playersInList.map(({ fullName, position, avatar, id }) => {
 					return (
 						<li key={id}>
-							<PlayerBadge fullName={fullName} position={position} avatar={avatar} id={id} />
+							<PlayerBadge
+								fullName={fullName}
+								position={position}
+								avatar={avatar}
+								avatarSize={60}
+								id={id}
+							/>
 						</li>
 					);
 				})}

@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/hooks/reduxHooks';
+import { deletePlayer, getPlayers } from '@/libs/firebase';
 import PlayerBadge from '@/components/PlayerBadge';
 import PlayerForm from '@/components/players/PlayerForm';
 import SwalCustom from '@/components/CustomSwal';
-import style from './index.module.scss';
-import { IPlayer } from '@/types';
 import CustomModal from '@/components/CustomModal';
+import { IPlayer } from '@/types';
+import style from './index.module.scss';
 
 const Players = () => {
-	const { players } = useAppSelector(state => state.players);
+	// const { players } = useAppSelector(state => state.players);
+	const [jugadores, setJugadores] = useState<IPlayer[]>([]);
 
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	useEffect(() => {
+		const getAllPlayers = async () => {
+			const playersFromDB = await getPlayers();
+			setJugadores(playersFromDB);
+		};
+		getAllPlayers();
+	}, []);
+
 	const [playerToEdit, setPlayerToEdit] = useState<IPlayer | null>(null);
 
 	// TODO: Agregar jugador (Firebase)
@@ -23,12 +32,32 @@ const Players = () => {
 		SwalCustom.fire({
 			title: `Seguro que desea eliminar a ${player.fullName}?`,
 			icon: 'warning',
-		}).then(result => console.log(result));
+			showLoaderOnConfirm: true,
+			allowOutsideClick: () => !SwalCustom.isLoading(),
+			preConfirm: async () => {
+				try {
+					await deletePlayer(player.id, player.avatar);
+				} catch (e) {
+					console.error(e);
+
+					SwalCustom.showValidationMessage('Ha ocurrido un error. Intente nuevamente');
+				}
+			},
+		}).then(result => {
+			if (result.isConfirmed) {
+				SwalCustom.fire({
+					title: `Jugador ${player.fullName} eliminado.`,
+					showDenyButton: false,
+					showConfirmButton: false,
+					icon: 'success',
+					showCloseButton: true,
+				});
+			}
+		});
 	};
 
 	// EDIT PLAYER
 	const onEditPlayer = (player: IPlayer) => {
-		setIsModalOpen(true);
 		setPlayerToEdit(player);
 	};
 
@@ -43,37 +72,38 @@ const Players = () => {
 
 			{/* Players Grid */}
 			<div className={style.players_grid}>
-				{players.map(player => (
-					<PlayerBadge
-						fullName={player.fullName}
-						position={player.position}
-						avatar={player.avatar}
-						id={player.id}
-						key={player.id}
-						avatarDraggable={false}
-						actions={{
-							delete: () => onDeletePlayer(player),
-							edit: () => {
-								onEditPlayer(player);
-							},
-						}}
-					/>
-				))}
+				{jugadores.length > 0 &&
+					jugadores.map(player => (
+						<PlayerBadge
+							fullName={player.fullName}
+							position={player.position}
+							avatar={player.avatar}
+							avatarSize={75}
+							id={player.id}
+							key={player.id}
+							avatarDraggable={false}
+							actions={{
+								delete: () => onDeletePlayer(player),
+								edit: () => {
+									onEditPlayer(player);
+								},
+							}}
+						/>
+					))}
 			</div>
 			{/* End Players Grid */}
 			<CustomModal
-				isOpen={isModalOpen}
-				onRequestClose={() => setIsModalOpen(false)}
+				isOpen={Boolean(playerToEdit)}
+				onRequestClose={() => setPlayerToEdit(null)}
 				headerTitle='Editar Jugador'
 			>
-				{playerToEdit && (
-					<PlayerForm
-						mode='edit'
-						fullName={playerToEdit.fullName}
-						position={playerToEdit.position}
-						avatar={playerToEdit.avatar}
-					/>
-				)}
+				<PlayerForm
+					mode='edit'
+					fullName={playerToEdit?.fullName}
+					position={playerToEdit?.position}
+					avatar={playerToEdit?.avatar}
+					id={playerToEdit?.id}
+				/>
 			</CustomModal>
 		</div>
 	);

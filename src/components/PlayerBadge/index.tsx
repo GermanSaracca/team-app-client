@@ -15,13 +15,14 @@ interface PlayerActionsProps {
 interface Props extends IPlayer {
 	avatarDraggable?: boolean;
 	actions?: Actions;
+	avatarSize: number;
 }
 
-const PlayerBadge = ({ avatarDraggable = true, actions, ...props }: Props) => {
+const PlayerBadge = ({ avatarDraggable = true, actions, avatarSize, ...props }: Props) => {
 	return (
 		<div className={style.player_badge}>
 			<div className={style.avatar}>
-				<PlayerAvatar xy={50} draggable={avatarDraggable} {...props} />
+				<PlayerAvatar xy={avatarSize} draggable={avatarDraggable} {...props} />
 			</div>
 			<div className={style.info}>
 				<p>{props.fullName}</p>

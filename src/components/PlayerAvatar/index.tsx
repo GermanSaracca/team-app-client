@@ -1,10 +1,11 @@
 import React from 'react';
 import { IPlayer } from '@/types/Player';
-import style from './index.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { setIsDraggingPlayer, setIsDraggingPlayerFromField } from '@/store/slices/formation';
-import classNames from 'classnames';
 import { firstNameToLetter } from '@/utils';
+import noAvatarImage from '@/assets/images/no_avatar_image.jpg';
+import classNames from 'classnames';
+import style from './index.module.scss';
 // import usePreventDefaultDragOver from '@/hooks/usePreventDefaultDragOver';
 
 interface Props extends IPlayer {
@@ -70,13 +71,14 @@ const PlayerAvatar = ({
 				className={classNames(style.player_avatar, {
 					[style.draggable]: draggable,
 				})}
-				style={styles}
+				style={{
+					...styles,
+					backgroundImage: avatar ? `url(${avatar?.url})` : `url(${noAvatarImage})`,
+				}}
 				onDragStart={handleDragStart}
 				onDragEnd={handleDragEnd}
 				draggable={draggable ? 'true' : 'false'}
-			>
-				<img src={avatar} alt={fullName || ''} />
-			</div>
+			/>
 			{draggable && playersInField.find(player => player.id === id) && (
 				<div className={style.current_player_name}>
 					<p>{firstNameToLetter(fullName)}</p>

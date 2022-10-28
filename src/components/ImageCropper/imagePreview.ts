@@ -1,3 +1,4 @@
+import { IMAGE_CROPPING_QUALITY } from '@/constants';
 import { PixelCrop } from 'react-image-crop';
 import { canvasPreview } from './canvasPreview';
 
@@ -5,13 +6,17 @@ let previewUrl = '';
 
 function toBlob(canvas: HTMLCanvasElement): Promise<Blob> {
 	return new Promise((resolve, reject) => {
-		canvas.toBlob(blob => {
-			if (blob) {
-				resolve(blob);
-			} else {
-				reject(new Error('Could not generate blob'));
-			}
-		});
+		canvas.toBlob(
+			blob => {
+				if (blob) {
+					resolve(blob);
+				} else {
+					reject(new Error('Could not generate blob'));
+				}
+			},
+			'image/jpeg',
+			IMAGE_CROPPING_QUALITY
+		);
 	});
 }
 
