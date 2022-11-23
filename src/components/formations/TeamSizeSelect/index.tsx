@@ -6,7 +6,7 @@ import { removeAllPlayerFromField, setTeamSize } from '@/store/slices/formation'
 import { TeamSizeOptionType } from '@/types/TeamSizeOptionType';
 import { useEffect, useState } from 'react';
 
-const TeamSizeSelector = () => {
+const TeamSizeSelect = () => {
 	const dispatch = useAppDispatch();
 	const { teamSize, playersInField } = useAppSelector(state => state.formation);
 	const [value, setValue] = useState(FORMATION_SIZES.find(size => size.value === teamSize));
@@ -49,4 +49,4 @@ const TeamSizeSelector = () => {
 		</div>
 	);
 };
-export default TeamSizeSelector;
+export default TeamSizeSelect;

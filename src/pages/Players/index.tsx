@@ -1,30 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '@/hooks/reduxHooks';
-import { deletePlayer, getPlayers } from '@/libs/firebase';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { deletePlayer } from '@/libs/firebase';
 import PlayerBadge from '@/components/PlayerBadge';
 import PlayerForm from '@/components/players/PlayerForm';
 import SwalCustom from '@/components/CustomSwal';
 import CustomModal from '@/components/CustomModal';
 import { IPlayer } from '@/types';
 import style from './index.module.scss';
+import { getAllPlayers } from '@/store/slices/players';
+import { SpinnerEllipsis } from '@/components/Spinners';
 
 const Players = () => {
-	// const { players } = useAppSelector(state => state.players);
-	const [jugadores, setJugadores] = useState<IPlayer[]>([]);
-
-	useEffect(() => {
-		const getAllPlayers = async () => {
-			const playersFromDB = await getPlayers();
-			setJugadores(playersFromDB);
-		};
-		getAllPlayers();
-	}, []);
-
+	const { players, loadingGetAllPlayers, errorGetAllPlayers } = useAppSelector(
+		state => state.players
+	);
+	const dispatch = useAppDispatch();
 	const [playerToEdit, setPlayerToEdit] = useState<IPlayer | null>(null);
 
-	// TODO: Agregar jugador (Firebase)
-	// TODO: Eliminar jugador (Firebase)
-	// TODO: Editar jugador (Firebase)
+	useEffect(() => {
+		dispatch(getAllPlayers());
+	}, [dispatch]);
+
 	// TODO: Eliminar object urls guardados en memoria luego de su uso
 
 	// DELETE PLAYER
@@ -72,8 +68,10 @@ const Players = () => {
 
 			{/* Players Grid */}
 			<div className={style.players_grid}>
-				{jugadores.length > 0 &&
-					jugadores.map(player => (
+				{loadingGetAllPlayers && <SpinnerEllipsis color='primary' />}
+				{!loadingGetAllPlayers &&
+					players.length > 0 &&
+					players.map(player => (
 						<PlayerBadge
 							fullName={player.fullName}
 							position={player.position}
@@ -103,6 +101,7 @@ const Players = () => {
 					position={playerToEdit?.position}
 					avatar={playerToEdit?.avatar}
 					id={playerToEdit?.id}
+					onSuccesfullOperation={() => setPlayerToEdit(null)}
 				/>
 			</CustomModal>
 		</div>

@@ -58,7 +58,7 @@ const DropFileZone = ({ onDropAccepted }: Props) => {
 			'image/jpeg': ['.jpg', '.jpeg'],
 		},
 		multiple: false,
-		maxSize: MAX_SIZE, // TODO: Agregar max size a los files luego!
+		maxSize: MAX_SIZE,
 		onDropRejected: handleDropRejected,
 		onDropAccepted: handleDropAccepted,
 	});

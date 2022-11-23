@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { formationSlice } from './slices/formation';
+import { formationSlice, formationListener } from './slices/formation';
 import { layoutSlice } from './slices/layout';
 import { playersSlice } from './slices/players';
 import { soundSlice } from './slices/sound';
@@ -11,6 +11,10 @@ export const store = configureStore({
 		sound: soundSlice.reducer,
 		layout: layoutSlice.reducer,
 	},
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}).prepend(formationListener.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

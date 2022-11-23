@@ -12,8 +12,8 @@ import { MdClear } from 'react-icons/md';
 import style from './index.module.scss';
 
 type FormInputs = {
-	fullName: string;
-	position: PositionOptionType | null;
+	fullNameForm: string;
+	positionForm: PositionOptionType | null;
 	avatarForm: string | null;
 };
 
@@ -23,9 +23,10 @@ interface Props {
 	position?: IPlayer['position'];
 	avatar?: IPlayer['avatar'];
 	id?: IPlayer['id'];
+	onSuccesfullOperation?: () => void;
 }
 
-const PlayerForm = ({ mode, fullName, position, avatar, id }: Props) => {
+const PlayerForm = ({ mode, fullName, position, avatar, id, onSuccesfullOperation }: Props) => {
 	const [previousAvatar] = useState<IPlayer['avatar'] | null>(avatar ?? null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const imageComponentRef = useRef<any>(null);
@@ -40,110 +41,38 @@ const PlayerForm = ({ mode, fullName, position, avatar, id }: Props) => {
 		formState: { errors, isDirty },
 	} = useForm<FormInputs>({
 		defaultValues: {
-			fullName: fullName ?? '',
-			position: position ? POSITION_OPTIONS.find(option => option.value === position) : undefined,
+			fullNameForm: fullName ?? '',
+			positionForm: position
+				? POSITION_OPTIONS.find(option => option.value === position)
+				: undefined,
 			avatarForm: avatar ? avatar.url : null,
 		},
 	});
 
 	const onSubmit: SubmitHandler<FormInputs> = async data => {
-		const { fullName, position, avatarForm } = data;
+		const { fullNameForm, positionForm, avatarForm } = data;
 
 		setLoading(true);
 
-		if (mode === 'create') {
-			try {
+		try {
+			if (mode === 'create') {
 				let imageBlob;
 
-				// Si el usuario subio imagen
+				// Si el usuario quiere subir una imagen
 				if (avatarForm) {
 					// Hacemos fetch de ese object url de la imagen cropeada y recuperamos el blob
 					const objectUrlData = await fetch(avatarForm);
 					imageBlob = await objectUrlData.blob();
 				}
 
-				const docId = await addPlayer({
-					fullName,
-					position: position?.value as IPlayer['position'],
+				await addPlayer({
+					fullName: fullNameForm,
+					position: positionForm?.value as IPlayer['position'],
 					imageBlob: imageBlob ?? null,
 				});
 
-				if (docId) {
-					SwalCustom.fire({
-						title: `Jugador ${fullName} agregado al equipo!`,
-						showDenyButton: false,
-						showConfirmButton: false,
-						icon: 'success',
-						toast: true,
-						position: 'top-start',
-						showCloseButton: true,
-						timer: 3000,
-					});
-
-					// Reset form
-					reset();
-					// Reset state of Image uploading component
-					imageComponentRef?.current?.handleReset();
-				}
-			} catch (e) {
-				console.error(e);
-
 				SwalCustom.fire({
-					title: `Ha ocurrido un error. Intente nuevamente`,
-					showDenyButton: false,
-					showConfirmButton: false,
-					icon: 'error',
-					toast: true,
-					position: 'top-right',
-					showCloseButton: true,
-					timer: 3000,
-				});
-			} finally {
-				setLoading(false);
-			}
-		}
-
-		if (mode === 'edit') {
-			console.log('EDITING');
-
-			try {
-				let deletePreviousImage = null;
-				let imageBlob;
-
-				// Si tenia imagen y la quiere reemplazar
-				if (avatarForm && previousAvatar && avatarForm.startsWith('blob')) {
-					console.log('Tenia imagen y la quiere reemplzar');
-					// Hacemos fetch de ese object url de la imagen cropeada y recuperamos el blob
-					const objectUrlData = await fetch(avatarForm);
-					imageBlob = await objectUrlData.blob();
-
-					deletePreviousImage = previousAvatar;
-				}
-
-				// Si tenia imagen y la quiere borrar
-				if (!avatarForm && previousAvatar) {
-					console.log('Tenia imagen y la quiere borrar');
-					deletePreviousImage = previousAvatar;
-				}
-
-				if (!previousAvatar && avatarForm) {
-					console.log('NO tenia imagen y quiere agregar');
-
-					// Hacemos fetch de ese object url de la imagen cropeada y recuperamos el blob
-					const objectUrlData = await fetch(avatarForm);
-					imageBlob = await objectUrlData.blob();
-				}
-
-				await updatePlayer({
-					fullName,
-					position: position?.value as IPlayer['position'],
-					id,
-					imageBlob: imageBlob ?? null,
-					deletePreviousImage,
-				});
-
-				SwalCustom.fire({
-					title: `Jugador ${fullName} editado correctamente.`,
+					title: `Jugador ${fullNameForm} agregado al equipo!`,
 					showDenyButton: false,
 					showConfirmButton: false,
 					icon: 'success',
@@ -157,22 +86,76 @@ const PlayerForm = ({ mode, fullName, position, avatar, id }: Props) => {
 				reset();
 				// Reset state of Image uploading component
 				imageComponentRef?.current?.handleReset();
-			} catch (e) {
-				console.error(e);
+
+				// Update the store with new players
+			}
+
+			if (mode === 'edit') {
+				let previousImageToDelete = null;
+				let imageBlob = null;
+
+				// Si tenia imagen y la quiere reemplazar
+				if (avatarForm && previousAvatar && avatarForm.startsWith('blob')) {
+					// Hacemos fetch de ese object url de la imagen cropeada y recuperamos el blob
+					const objectUrlData = await fetch(avatarForm);
+					imageBlob = await objectUrlData.blob();
+
+					previousImageToDelete = previousAvatar;
+				}
+
+				// Si tenia imagen y la quiere borrar
+				if (!avatarForm && previousAvatar) {
+					previousImageToDelete = previousAvatar;
+				}
+				// NO tenia imagen y quiere agregar
+				if (!previousAvatar && avatarForm) {
+					// Hacemos fetch de ese object url de la imagen cropeada y recuperamos el blob
+					const objectUrlData = await fetch(avatarForm);
+					imageBlob = await objectUrlData.blob();
+				}
+
+				await updatePlayer({
+					fullName: fullNameForm,
+					position: positionForm?.value as IPlayer['position'],
+					id,
+					imageBlob,
+					previousImageToDelete,
+				});
 
 				SwalCustom.fire({
-					title: `Ha ocurrido un error. Intente nuevamente`,
+					title: `Jugador ${fullNameForm} editado correctamente.`,
 					showDenyButton: false,
 					showConfirmButton: false,
-					icon: 'error',
+					icon: 'success',
 					toast: true,
-					position: 'top-right',
+					position: 'top-start',
 					showCloseButton: true,
 					timer: 3000,
 				});
-			} finally {
-				setLoading(false);
+
+				// Reset form
+				reset();
+				// Reset state of Image uploading component
+				imageComponentRef?.current?.handleReset();
+
+				// Close parent modal
+				onSuccesfullOperation && onSuccesfullOperation();
 			}
+		} catch (e) {
+			console.error(e);
+
+			SwalCustom.fire({
+				title: `Ha ocurrido un error. Intente nuevamente`,
+				showDenyButton: false,
+				showConfirmButton: false,
+				icon: 'error',
+				toast: true,
+				position: 'top-right',
+				showCloseButton: true,
+				timer: 3000,
+			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -191,9 +174,9 @@ const PlayerForm = ({ mode, fullName, position, avatar, id }: Props) => {
 					id='fullName'
 					placeholder='Ej: Lionel Messi'
 					autoComplete='off'
-					{...register('fullName', { required: true })}
+					{...register('fullNameForm', { required: true })}
 				/>
-				{errors.fullName && (
+				{errors.fullNameForm && (
 					<span className={style.error_span}>Por favor ingrese el nombre del jugador</span>
 				)}
 			</div>
@@ -214,10 +197,10 @@ const PlayerForm = ({ mode, fullName, position, avatar, id }: Props) => {
 						/>
 					)}
 					rules={{ required: true }}
-					name='position'
+					name='positionForm'
 					control={control}
 				/>
-				{errors.position && (
+				{errors.positionForm && (
 					<span className={style.error_span}>Por favor seleccione el puesto del jugador</span>
 				)}
 			</div>

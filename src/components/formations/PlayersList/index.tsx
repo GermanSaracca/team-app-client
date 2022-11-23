@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { useEffect } from 'react';
 import useSound from 'use-sound';
 import { removePlayerFromField, resetFormation } from '@/store/slices/formation';
 import PlayerBadge from '../../PlayerBadge';
@@ -9,6 +10,7 @@ import { MdEventSeat } from 'react-icons/md';
 import pinbalSound from '../../../assets/audio/pinbal.wav';
 import classNames from 'classnames';
 import style from './index.module.scss';
+import { getAllPlayers } from '@/store/slices/players';
 
 const PlayersList = () => {
 	const { playersInList, isDraggingPlayer, isDraggingPlayerFromField } = useAppSelector(
@@ -18,6 +20,12 @@ const PlayersList = () => {
 	const dispatch = useAppDispatch();
 	const [play] = useSound(pinbalSound);
 	const playersListRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (playersInList.length === 0) {
+			dispatch(getAllPlayers());
+		}
+	}, []);
 
 	// When
 	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {

@@ -1,7 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createListenerMiddleware, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { IPlayer } from '@/types/Player';
 import { FORMATION_OPTIONS, PLAYERS } from '@/data';
+import { getAllPlayers } from './players';
+
+export const formationListener = createListenerMiddleware();
+
+// ** Escuchamos cuando se cargan los jugadores en el store de players y los agregagmos como initial state */
+formationListener.startListening({
+	matcher: isAnyOf(getAllPlayers.fulfilled), // Aca puedo agregar cuantos action creators quiero escuchar
+	effect: (action, listenerApi) => {
+		// console.log({ action });
+		// console.log({ listenerApi });
+		// console.log('Escuche cambio en la accion que trae todos los players');
+		console.log(listenerApi);
+		const state = listenerApi.getState();
+
+		const { players } = state;
+		console.log({ players });
+
+		listenerApi.dispatch(setInitialPlayersInList(players.players));
+	},
+});
 
 // Define a type for the slice state
 interface FormationState {
@@ -18,7 +38,7 @@ const initialState: FormationState = {
 	formation: FORMATION_OPTIONS[0].value,
 	teamSize: 11,
 	playersInField: [],
-	playersInList: PLAYERS,
+	playersInList: [],
 	isDraggingPlayer: false,
 	isDraggingPlayerFromField: false,
 };
@@ -38,6 +58,9 @@ export const formationSlice = createSlice({
 		},
 		setTeamSize: (state, action: PayloadAction<number>) => {
 			state.teamSize = action.payload;
+		},
+		setInitialPlayersInList: (state, action: PayloadAction<IPlayer[]>) => {
+			state.playersInList = action.payload;
 		},
 		addPlayerToField: (state, action: PayloadAction<IPlayer>) => {
 			// Add player to field
@@ -101,6 +124,7 @@ export const formationSlice = createSlice({
 export const {
 	setFormation,
 	setTeamSize,
+	setInitialPlayersInList,
 	addPlayerToField,
 	removePlayerFromField,
 	removeAllPlayerFromField,

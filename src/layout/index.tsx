@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { Profiler, ReactNode } from 'react';
 
 import AsideNavigation from './AsideNavigation';
 import Header from './Header';
@@ -17,7 +17,14 @@ const Layout = ({ children }: Props) => {
 			{/* renders only below 1200px */}
 			<MobileNavigation />
 			<Header />
-			<main className={style.main_wrapper}>{children}</main>
+			<Profiler
+				id='main'
+				onRender={(...data) => {
+					console.log(data);
+				}}
+			>
+				<main className={style.main_wrapper}>{children}</main>
+			</Profiler>
 		</div>
 	);
 };
